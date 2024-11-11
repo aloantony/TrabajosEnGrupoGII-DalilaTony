@@ -23,7 +23,7 @@ Repositorio para todos los trabajos en equipo de la universidad.
       - Haz clic en el botón **Add file**.
       - Selecciona **Create new file**.
      ```
-     nueva-carpeta/
+     nueva-carpeta/README.md
      ```
      
 
