@@ -44,7 +44,7 @@ Repositorio para todos los trabajos en equipo de la universidad.
 
 ---
 
-# ** MANUAL A TRAVÉS DE LA CONSOLA: **
+#  MANUAL A TRAVÉS DE LA CONSOLA: 
 
 ## Pasos para Añadir Nuevas Carpetas y Archivos al Repositorio
 
