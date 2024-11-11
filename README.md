@@ -9,14 +9,10 @@ Repositorio para todos los trabajos en equipo de la universidad.
 
 ## Pasos para Añadir Nuevas Carpetas y Archivos Manualmente (Sin Consola)
 
-### 1. **Abrir el Repositorio en GitHub**
-   - Ve al repositorio en tu navegador web.
-   - Asegúrate de que tienes permisos para realizar cambios en el repositorio.
-
-### 2. **Navegar al Directorio Correcto**
+### 1. **Navegar al Directorio Correcto**
    - Si deseas agregar una nueva carpeta o archivo en un directorio específico, navega hasta ese directorio dentro del repositorio.
 
-### 3. **Crear un Nuevo Archivo**
+### 2. **Crear un Nuevo Archivo**
    - Haz clic en el botón **Add file**.
    - Selecciona **Create new file**.
    - Para crear un archivo dentro de una nueva carpeta, escribe el nombre de la carpeta seguido de una barra `/` y luego el nombre del archivo. Por ejemplo:
@@ -24,26 +20,20 @@ Repositorio para todos los trabajos en equipo de la universidad.
      nueva-carpeta/archivo.txt
      ```
 
-### 4. **Editar el Contenido del Archivo**
+### 3. **Editar el Contenido del Archivo**
    - Ingresa el contenido del archivo en el editor proporcionado por GitHub.
 
-### 5. **Guardar el Archivo**
+### 4. **Guardar el Archivo**
    - En la parte inferior de la página, añade un mensaje descriptivo en la sección **Commit changes**.
    - Selecciona si deseas guardar los cambios directamente en la rama principal (**main**) o en una nueva rama.
    - Haz clic en **Commit new file** para guardar el archivo.
 
-### 6. **Subir Archivos Existentes**
+### 5. **Subir Archivos Existentes**
    - Si deseas subir un archivo que ya tienes en tu computadora:
      1. Haz clic en **Add file**.
      2. Selecciona **Upload files**.
      3. Arrastra y suelta los archivos o selecciona los archivos desde tu computadora.
      4. Escribe un mensaje en la sección **Commit changes** y haz clic en **Commit changes**.
-
-### 7. **Crear Pull Request (Opcional)**
-   - Si los cambios se realizaron en una nueva rama, puedes crear un **Pull Request** para que otros revisen y aprueben tus cambios:
-     - Ve a la pestaña **Pull Requests**.
-     - Haz clic en **New Pull Request**.
-     - Selecciona tu rama y crea la solicitud.
 
 ---
 
