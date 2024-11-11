@@ -19,6 +19,13 @@ Repositorio para todos los trabajos en equipo de la universidad.
      ```
      nueva-carpeta/archivo.txt
      ```
+      2.1 **Crear una Nueva carpeta**
+      - Haz clic en el botón **Add file**.
+      - Selecciona **Create new file**.
+     ```
+     nueva-carpeta/
+     ```
+     
 
 ### 3. **Editar el Contenido del Archivo**
    - Ingresa el contenido del archivo en el editor proporcionado por GitHub.
