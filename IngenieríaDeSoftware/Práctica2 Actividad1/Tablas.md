@@ -48,7 +48,7 @@
 | RF-4.1             | Identificar piezas de cada automóvil, su cantidad y color.                                                                  |
 | RF-4.2             | Registrar proveedores que suministran cada pieza (varios posibles por pieza).                                                |
 | RF-4.3             | Registrar precio que cada proveedor cobra por pieza.                                                                         |
-| RF-4.4             | Generar pedidos automáticos a proveedores cuando el stock de piezas esté bajo.                                              |
+| RF-4.4             | Generar pedidos a proveedores cuando el stock de piezas esté bajo.                                              |
 | RF-5.1             | Registrar clientes que alquilan automóviles y las fechas de cada alquiler por cliente.                                       |
 | RF-5.2             | Registrar compradores de automóviles, permitiendo múltiples compradores para un mismo automóvil.                             |
 | RF-5.3             | Registrar importe de compra de cada automóvil por cada comprador.                                                            |
