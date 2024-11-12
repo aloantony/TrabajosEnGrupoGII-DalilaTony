@@ -58,22 +58,22 @@
 ### TAbla 2.
 | Nº Req. Funcional | Tipo Relación Binaria/Ternaria | Conjunto de Dato 1 | Cardinalidad del conjunto de Datos 2 con el Conj. Datos 1 | Asociación/Relación         | Cardinalidad del conjunto de Datos 1 con el Conj. Datos 2 | Conjunto de Dato 2 | Conjunto de Dato 3 |
 |--------------------|--------------------------------|---------------------|-----------------------------------------------------------|-----------------------------|-----------------------------------------------------------|---------------------|--------------------|
-| RF-1.1             | Binaria                       | Empleados           | N:N                                                       | Colaboran en reparaciones   | N:N                                                       | Reparaciones        |                |
-| RF-1.2             | Ternaria                      | Empleados           |                                                       | Tiempo dedicado a reparaciones |                                                       | Reparaciones        | Automóviles        |
-| RF-1.3             | Binaria                       | Empleados           | 1:1                                                       | Sueldo por hora             | 1:1                                                       | Sueldo              |                |
-| RF-1.4             | Binaria                       | Empleados           | N:1                                                       | Subordinado-Jefe            | 1:N                                                       | Empleados           |                |
-| RF-2.1             | Binaria                       | Reparaciones        | 1:N                                                       | Tiempo total de reparación  | N:1                                                       | Automóviles         |                |
-| RF-2.2             | Binaria                       | Reparaciones        | 1:N                                                       | Coste total de reparación   | N:1                                                       | Automóviles         |                |
-| RF-3.1             | Ternaria                      | Empleados           |                                                       | Participan en reparaciones  |                                                       | Reparaciones        | Automóviles        |
-| RF-3.2             | Ternaria                      | Empleados           |                                                       | Fechas de participación     |                                                       | Reparaciones        | Fechas             |
-| RF-4.1             | Binaria                      | Piezas              | 1:N                                                      | Utiliza piezas en automóviles | 1:1                                                      | Automóviles        |                  |
-| RF-4.2             | Binaria                       | Proveedores         | 1:N                                                       | Suministran piezas          | N:1                                                       | Piezas              |                |
-| RF-4.3             | Binaria                       | Proveedores         | 1:N                                                       | Precio por pieza            | N:1                                                       | Piezas              |                |
-| RF-4.4             | Binaria                       | Reparaciones        | 1:N                                                       | Pedidos automáticos         | N:1                                                       | Proveedores         |                |
-| RF-5.1             | Ternaria                      | Clientes            | None                                                      | Alquiler de automóviles     | None                                                      | Automóviles         | Fechas             |
-| RF-5.2             | Binaria                       | Clientes            | 1:N                                                       | Compra de automóviles       | N:1                                                       | Automóviles         |                |
-| RF-5.3             | Binaria                       | Clientes            | 1:N                                                       | Importe de compra           | N:1                                                       | Automóviles         |                |
-| RF-5.4             | Binaria                       | Automóviles         | N:N                                                       | Garaje de almacenamiento    | N:N                                                       | Garajes             |                |
+| RF-1.1             | Binaria                       | Empleados           | N:N    | Colaboran en reparaciones   | N:N | Reparaciones        |                |
+| RF-1.2             | Ternaria                      | Empleados           |        | Tiempo dedicado a reparaciones |      | Reparaciones        | Automóviles    |
+| RF-1.3             | Binaria                       | Empleados           | 1:1    | Sueldo por hora             | 1:1     | Sueldo              |                |
+| RF-1.4             | Binaria                       | Empleados           | N:1    | Subordinado-Jefe            | 1:N     | Empleados           |                |
+| RF-2.1             | Binaria                       | Reparaciones        | 1:N    | Tiempo total de reparación  | N:1     | Automóviles         |                |
+| RF-2.2             | Binaria                       | Reparaciones        | 1:N    | Coste total de reparación   | N:1     | Automóviles         |                |
+| RF-3.1             | Ternaria                      | Empleados           |        | Participan en reparaciones  |         | Reparaciones        | Automóviles    |
+| RF-3.2             | Ternaria                      | Empleados           |        | Fechas de participación     |         | Reparaciones        | Fechas         |
+| RF-4.1             | Binaria                       | Piezas              | 1:N    | Utiliza piezas en automóviles | 1:1     | Automóviles       |                |
+| RF-4.2             | Binaria                       | Proveedores         | 1:N    | Suministran piezas          | N:1     | Piezas              |                |
+| RF-4.3             | Binaria                       | Proveedores         | 1:N    | Precio por pieza            | N:1     | Piezas              |                |
+| RF-4.4             | Binaria                       | Reparaciones        | 1:N    | Pedidos automáticos         | N:1     | Proveedores         |                |
+| RF-5.1             | Ternaria                      | Clientes            | None   | Alquiler de automóviles     | None    | Automóviles         | Fechas         |
+| RF-5.2             | Binaria                       | Clientes            | 1:N    | Compra de automóviles       | N:1     | Automóviles         |                |
+| RF-5.3             | Binaria                       | Clientes            | 1:N    | Importe de compra           | N:1     | Automóviles         |                |
+| RF-5.4             | Binaria                       | Automóviles         | N:N    | Garaje de almacenamiento    | N:N     | Garajes             |                |
 
 
 
