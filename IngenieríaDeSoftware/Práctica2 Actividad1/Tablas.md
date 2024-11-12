@@ -57,7 +57,7 @@
 ### TAbla 2.
 | Nº Req. Funcional | Tipo Relación Binaria/Ternaria | Conjunto de Dato 1 | Cardinalidad del conjunto de Datos 2 con el Conj. Datos 1 | Asociación/Relación         | Cardinalidad del conjunto de Datos 1 con el Conj. Datos 2 | Conjunto de Dato 2 | Conjunto de Dato 3 |
 |--------------------|--------------------------------|---------------------|-----------------------------------------------------------|-----------------------------|-----------------------------------------------------------|---------------------|--------------------|
-| RF-1.1             | Binaria                       | Empleados           | N:N    | Colaboran en reparaciones   | N:N | Reparaciones        |                |
+| RF-1.a             | Binaria                       | Empleados           | N      | Colaboran en reparaciones   | N | Reparaciones        |                |
 | RF-1.2             | Ternaria                      | Empleados           |        | Tiempo dedicado a reparaciones |      | Reparaciones        | Automóviles    |
 | RF-1.3             | Binaria                       | Empleados           | 1:1    | Sueldo por hora             | 1:1     | Sueldo              |                |
 | RF-1.4             | Binaria                       | Empleados           | N:1    | Subordinado-Jefe            | 1:N     | Empleados           |                |
