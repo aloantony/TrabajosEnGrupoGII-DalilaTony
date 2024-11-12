@@ -59,7 +59,7 @@
 |--------------------|--------------------------------|---------------------|-----------------------------------------------------------|-----------------------------|-----------------------------------------------------------|---------------------|--------------------|
 | RF-1.a             | Binaria                       | Empleados           | N      | Colaboran en reparaciones   | N       | Automóviles         |                |
 | RF-1.b             | Ternaria                      | Empleados           |        | Tiempo dedicado a reparaciones |      | Reparaciones        | Automóviles    |
-| RF-1.c             | Binaria                       | Empleados           |        | Sueldo por hora             |         | Empleados           |                |
+| RF-1.c*****             | Binaria                       | Empleados           |        | Sueldo por hora             |         | Empleados           |                |
 | RF-1.d             | Binaria                       | Empleados           |     | Subordinado-Jefe            |      | Empleados           |                |
 | RF-2.a             | Binaria                       | Reparaciones        | 1:N    | Tiempo total de reparación  | N:1     | Automóviles         |                |
 | RF-2.b             | Binaria                       | Reparaciones        | 1:N    | Coste total de reparación   | N:1     | Automóviles         |                |
