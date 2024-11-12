@@ -1,3 +1,39 @@
+#Enunciado:
+
+---
+
+**A continuación se indica un contexto sobre el que modelar una serie de requerimientos funcionales: Un taller en el que se realizan reparaciones, ventas y compras de los automóviles.**
+
+**Tarea 1:** Se pide modelar, separadamente, uno a uno los siguientes Requisitos Funcionales, rellenando para ello las Tablas pedidas. Cada Requerimiento puede dar lugar a una o más filas en cada una de las 3 tablas.
+
+1. **R1.** Se desea conocer/modelar los hechos:
+   a) Los empleados que colaboran juntos en la reparación de cada automóvil, sabiendo que un mismo empleado puede participar en la reparación de varios automóviles.  
+   b) El tiempo dedicado por cada empleado en la reparación de cada automóvil.  
+   c) El sueldo por hora que cobra cada empleado.  
+   d) Por cada empleado: conocer qué empleados tiene como subordinados, y qué empleado es su jefe.
+
+2. **R2.** Partiendo de lo anterior se desea poder conocer:  
+   a) El tiempo total requerido en la reparación de cada automóvil.  
+   b) El coste total de la reparación de cada automóvil.
+
+3. **R3.** Partiendo de lo anterior, se desea conocer:  
+   a) El número de veces que un mismo empleado ha participado en la reparación de un mismo automóvil.  
+   b) Todas las fechas en que un mismo empleado ha participado en la reparación de un mismo automóvil.
+
+4. **R4.** Se desea conocer los hechos:  
+   a) Las diferentes piezas de cada automóvil y la cantidad que hay de cada una de ellas en cada automóvil, así como el color de cada pieza sabiendo que cada una es de un único color de entre varios posibles.  
+   b) Los proveedores que suministran cada una de las piezas sabiendo que una misma pieza puede ser suministrada por varios proveedores.  
+   c) Saber el precio al que cada proveedor suministra cada pieza.  
+   d) Sobre el apartado b, se deben hacer pedidos a los proveedores de las piezas que estén bajo stock mínimo.
+
+5. **R5.** Se desea conocer:  
+   a) Los clientes que toman en alquiler cada automóvil, y todas las fechas en que un mismo cliente haya tomado en alquiler un mismo automóvil.  
+   b) Los compradores que han comprado automóviles, sabiendo que una misma persona puede haber comprado varios automóviles, y que un automóvil puede haber sido comprado entre varias personas.  
+   c) El importe de compra de cada automóvil por cada persona compradora.  
+   d) Conocer el garaje en el que está almacenado cada automóvil de la empresa, sabiendo que en un mismo garaje pueden guardarse más de un automóvil.
+
+--- 
+
 ### Tabla 1. Requerimientos Funcionales
 
 | Nº Req. Funcional | Descripción                                                                                                                 |
