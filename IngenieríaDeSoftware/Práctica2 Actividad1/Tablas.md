@@ -38,3 +38,8 @@
 | RF-5.2             | Binaria                       | Compradores         | N:N                                                       | Compras múltiples                | N:N                                                       | Automóviles         | None               |
 | RF-5.3             | Binaria                       | Automóviles         | 1:N                                                       | Importe de compra                | N:1                                                       | Compradores         | None               |
 | RF-5.4             | Binaria                       | Automóviles         | N:N                                                       | Garaje de almacenamiento         | N:N                                                       | Garajes             | None               |
+
+
+
+
+PRUEBA PARA HACER COMMIT
