@@ -78,9 +78,3 @@
 
 
 
-PRUEBA PARA HACER COMMIT
-
-nuevo commit
-
-
-asdfasdfasdf
