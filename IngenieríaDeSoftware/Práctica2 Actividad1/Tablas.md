@@ -33,26 +33,26 @@
 
 --- 
 
-### Tabla 1. Requerimientos Funcionales
+### Tabla de Requerimientos Funcionales
 
-| Nº Req. Funcional | Descripción                                                                                                                 |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| RF-1.1             | Identificar empleados que colaboran en la reparación de cada automóvil.                                                     |
-| RF-1.2             | Registrar tiempo dedicado por cada empleado en la reparación de cada automóvil.                                             |
-| RF-1.3             | Registrar sueldo por hora de cada empleado.                                                                                 |
-| RF-1.4             | Identificar subordinados y jefe de cada empleado.                                                                           |
-| RF-2.1             | Calcular tiempo total requerido en la reparación de cada automóvil.                                                         |
-| RF-2.2             | Calcular coste total de la reparación de cada automóvil.                                                                    |
-| RF-3.1             | Determinar el número de veces que un empleado ha participado en la reparación de un mismo automóvil.                        |
-| RF-3.2             | Registrar fechas en que un empleado ha participado en la reparación de un mismo automóvil.                                  |
-| RF-4.1             | Identificar piezas de cada automóvil, su cantidad y color.                                                                  |
-| RF-4.2             | Registrar proveedores que suministran cada pieza (varios posibles por pieza).                                                |
-| RF-4.3             | Registrar precio que cada proveedor cobra por pieza.                                                                         |
-| RF-4.4             | Generar pedidos a proveedores cuando el stock de piezas esté bajo.                                              |
-| RF-5.1             | Registrar clientes que alquilan automóviles y las fechas de cada alquiler por cliente.                                       |
-| RF-5.2             | Registrar compradores de automóviles, permitiendo múltiples compradores para un mismo automóvil.                             |
-| RF-5.3             | Registrar importe de compra de cada automóvil por cada comprador.                                                            |
-| RF-5.4             | Registrar el garaje donde se almacena cada automóvil, permitiendo múltiples automóviles por garaje.                          |
+| **Requerimiento** | **Descripción**                                                                                  |
+|-------------------|--------------------------------------------------------------------------------------------------|
+| **R1.a**          | Los empleados que colaboran juntos en la reparación de cada automóvil.                           |
+| **R1.b**          | El tiempo dedicado por cada empleado en la reparación de cada automóvil.                         |
+| **R1.c**          | El sueldo por hora que cobra cada empleado.                                                      |
+| **R1.d**          | Por cada empleado, conocer qué empleados tiene como subordinados y qué empleado es su jefe.      |
+| **R2.a**          | El tiempo total requerido en la reparación de cada automóvil.                                    |
+| **R2.b**          | El coste total de la reparación de cada automóvil.                                               |
+| **R3.a**          | El número de veces que un mismo empleado ha participado en la reparación de un mismo automóvil.  |
+| **R3.b**          | Todas las fechas en que un mismo empleado ha participado en la reparación de un mismo automóvil. |
+| **R4.a**          | Las piezas de cada automóvil, la cantidad de cada una y su color.                                |
+| **R4.b**          | Los proveedores que suministran cada pieza, con la posibilidad de varios proveedores por pieza.  |
+| **R4.c**          | El precio al que cada proveedor suministra cada pieza.                                           |
+| **R4.d**          | Hacer pedidos de piezas a proveedores cuando estén bajo el stock mínimo.                         |
+| **R5.a**          | Los clientes que alquilan cada automóvil y las fechas en que lo han hecho.                       |
+| **R5.b**          | Los compradores que han comprado automóviles, considerando compras compartidas.                  |
+| **R5.c**          | El importe de compra de cada automóvil por cada persona compradora.                              |
+| **R5.d**          | El garaje en el que está almacenado cada automóvil, con posibilidad de más de un automóvil por garaje. |
 
 ### TAbla 2.
 | Nº Req. Funcional | Tipo Relación Binaria/Ternaria | Conjunto de Dato 1 | Cardinalidad del conjunto de Datos 2 con el Conj. Datos 1 | Asociación/Relación         | Cardinalidad del conjunto de Datos 1 con el Conj. Datos 2 | Conjunto de Dato 2 | Conjunto de Dato 3 |
