@@ -57,21 +57,21 @@
 ### Tabla 2. Tabla de asociaciones entre los conjuntos de datos con sus cardinalidades
 | Nº Req. Funcional | Tipo Relación Binaria/Ternaria | Conjunto de Dato 1 | Cardinalidad del conjunto de Datos 2 con el Conj. Datos 1 | Asociación/Relación         | Cardinalidad del conjunto de Datos 1 con el Conj. Datos 2 | Conjunto de Dato 2 | Conjunto de Dato 3 |
 |--------------------|--------------------------------|---------------------|-----------------------------------------------------------|-----------------------------|-----------------------------------------------------------|---------------------|--------------------|
-| RF-1.a             | Binaria                       | Empleados           | N    | Colaboran en reparaciones        | N    | Automóviles         |                |
-| RF-1.b             | Ternaria                      | Empleados           |      | Tiempo dedicado a reparaciones   |      | Reparaciones        | Automóviles    |
+| RF-1.a             | Binaria                       | Empleados           | N    | Colaboran en reparaciones        | N    | Reparaciones        |                |
+| RF-1.b             | Binaria                      | Empleados           | N     | Tiempo empleado en reparaciones   | N     | Reparaciones        |                 |
 | RF-1.c             |                               | Empleados           |      | Sueldo por hora                  |      |                     |                |
 | RF-1.d             | Binaria                       | Empleados (jefes)   | 1     | Subordinado-Jefe                 | N     | Empleados (subordinados)|                |
 | RF-2.a             | Binaria                       | Reparaciones        | N    | Tiempo total de reparación       | 1    | Automóviles         |                |
 | RF-2.b             | Binaria                       | Reparaciones        | N    | Coste total de reparación        | 1    | Automóviles         |                |
-| RF-3.a             | Ternaria                      | Empleados           |      | Número de reparaciones           |      | Reparaciones        | Automóviles    |
+| RF-3.a             | Binaria                      | Empleados           | N     | Participan en un número de reparaciones en un coche           | N     | Reparaciones        |                |
 | RF-3.b             | Ternaria                      | Empleados           |      | Fechas de reparación             |      | Reparaciones        | Automóviles    |
 | RF-4.a             | Binaria                       | Piezas              | N    | Piezas en automóviles            | 1    | Automóviles         |                |
 | RF-4.b             | Binaria                       | Proveedores         | N    | Suministro de piezas             | N    | Piezas              |                |
-| RF-4.c             | Binaria                       | Proveedores         | N    | Precio por pieza                 | N    | Piezas              | Suministro     |
-| RF-4.d             | Ternaria                      | Empleados           |      | Pedidos piezas bajo stock mínimo |      | Proveedores         | Piezas         |
+| RF-4.c             | Binaria                       | Proveedores         | N    | Precio por pieza                 | N    | Piezas              |      |
+| RF-4.d             | Ternaria                      | Piezas           |      | Pedidos piezas bajo stock mínimo |      | Proveedores         | Suministro         |
 | RF-5.a             | Ternaria                      | Clientes            |      | Fechas de alquiler de automóviles|      | Automóviles         | Alquileres     |
 | RF-5.b             | Binaria                       | Clientes            | N    | Compra de automóviles            | N    | Automóviles         |                |
-| RF-5.c             | Ternaria                      | Clientes            |      | Importe de compra                |      | Automóviles         | Compras        |
+| RF-5.c             | Binaria                      | Clientes            | N     | Importe de compra                | N      | Automóviles         |         |
 | RF-5.d             | Binaria                       | Automóviles         | N    | Garaje de almacenamiento         | 1    | Garajes             |                |
 
 ### Tabla 3.
@@ -88,9 +88,9 @@
 | RF-4.a             | Piezas = {__ID_Pieza_Única__, Nombre_Pieza, Color}         | Automóviles = {__ID_Automovil__}                         |                                                                              |
 | RF-4.b             | Proveedores = {__ID_Proveedor__}                           | Piezas = {__ID_Pieza_Única__}                            |                                                                              |
 | RF-4.c             | Proveedores = {__ID_Proveedor__}                           | Piezas = {__ID_Pieza_Única__, Pieza}                            | Proveedores_Piezas = {ID_Proveedor, Pieza, Precio}                 |
-| RF-4.d             | Suministros = {ID_Proveedor, ID_Pieza_Única, Cantidad_A_Suministrar} | Piezas = {__ID_Pieza_Única__, Nombre_Pieza, Stock_Actual, Stock_Mínimo} |  Proveedores = {__ID_Proveedor__}                                                                            |
+| RF-4.d             | Piezas = {__ID_Pieza_Única__, Nombre_Pieza, Stock_Actual, Stock_Mínimo} |  Proveedores = {__ID_Proveedor__}                                                                            | Suministros = {ID_Proveedor, Pieza, Cantidad_A_Suministrar, Stock_Actual, Stock_Mínimo} |
 | RF-5.a             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         | Alquileres = {ID_Alquiler, ID_Cliente, ID_Automovil, Fecha_Alquiler}        |
-| RF-5.b             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         | Clientes_Automóviles = {ID_Cliente, ID_Automovil, Importe_Compra}           |
+| RF-5.b             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         | Clientes_Automóviles = {ID_Cliente, ID_Automovil}           |
 | RF-5.c             | Clientes = {__ID_Cliente__}  |  Automóviles = {__ID_Automovil__}                                                   |  Compras = {ID_Compra, ID_Cliente, ID_Automovil, Importe_Compra}                                                                            |
 | RF-5.d             | Automóviles = {__ID_Automovil__}                           | Garajes = {__ID_Garaje__}                                |                                                                              |
 
