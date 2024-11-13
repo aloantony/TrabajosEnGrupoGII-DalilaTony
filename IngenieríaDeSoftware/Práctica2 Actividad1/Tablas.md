@@ -69,9 +69,9 @@
 | RF-4.b             | Binaria                       | Proveedores         | N    | Suministro de piezas             | N    | Piezas              |                |
 | RF-4.c             | Ternaria                      | Proveedores         |      | Precio por pieza                 |      | Piezas              | Suministro     |
 | RF-4.d             | Ternaria                      | Empleados           |      | Pedidos piezas bajo stock mínimo |      | Proveedores         | Piezas         |
-| RF-5.a             | Binaria                       | Clientes            | 1    | Fechas de alquiler de automóviles| N    | Automóviles         |                |
-| RF-5.b             | Binaria                       | Clientes            | 1    | Compra de automóviles            | N    | Automóviles         |                |
-| RF-5.c             | Binaria                       | Clientes            | 1    | Importe de compra                | 1    | Automóviles         |                |
+| RF-5.a             | Ternaria                      | Clientes            |      | Fechas de alquiler de automóviles|      | Automóviles         | Alquileres     |
+| RF-5.b             | Binaria                       | Clientes            | 1    | Compra de automóviles            | N    | Automóviles         | Compras        |
+| RF-5.c             | Ternaria                      | Clientes            |      | Importe de compra                |      | Automóviles         |                |
 | RF-5.d             | Binaria                       | Automóviles         | 1    | Garaje de almacenamiento         | N    | Garajes             |                |
 
 # PREGUNTAR EN EL FORO
