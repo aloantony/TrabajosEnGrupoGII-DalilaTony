@@ -68,7 +68,7 @@
 | RF-4.a             | Binaria                       | Piezas              | N    | Piezas en automóviles            | 1    | Automóviles         |                |
 | RF-4.b             | Binaria                       | Proveedores         | N    | Suministro de piezas             | N    | Piezas              |                |
 | RF-4.c             | Binaria                       | Proveedores         | N    | Precio por pieza                 | N    | Piezas              |      |
-| RF-4.d             | Ternaria                      | Piezas           |      | Pedidos piezas bajo stock mínimo |      | Proveedores         | Suministro         |
+| RF-4.d             | Ternaria                      | Piezas           |      | Pedidos piezas bajo stock mínimo |      | Proveedores         | Pedido suministro         |
 | RF-5.a             | Ternaria                      | Clientes            |      | Fechas de alquiler de automóviles|      | Automóviles         | Alquileres     |
 | RF-5.b             | Binaria                       | Clientes            | N    | Compra de automóviles            | N    | Automóviles         |                |
 | RF-5.c             | Binaria                      | Clientes            | N     | Importe de compra                | N      | Automóviles         |         |
@@ -88,7 +88,7 @@
 | RF-4.a             | Piezas = {__ID_Pieza_Única__, Nombre_Pieza, Color}         | Automóviles = {__ID_Automovil__}                         |                                                                              |
 | RF-4.b             | Proveedores = {__ID_Proveedor__}                           | Piezas = {__ID_Pieza_Única__}                            |                                                                              |
 | RF-4.c             | Proveedores = {__ID_Proveedor__}                           | Piezas = {__ID_Pieza_Única__, Pieza}                            | Proveedores_Piezas = {ID_Proveedor, Pieza, Precio}                 |
-| RF-4.d             | Piezas = {__ID_Pieza_Única__, Nombre_Pieza, Stock_Actual, Stock_Mínimo} |  Proveedores = {__ID_Proveedor__}                                                                            | Suministros = {ID_Proveedor, Pieza, Cantidad_A_Suministrar, Stock_Actual, Stock_Mínimo} |
+| RF-4.d             | Piezas = {__ID_Pieza_Única__, Nombre_Pieza, Stock_Actual, Stock_Mínimo} |  Proveedores = {__ID_Proveedor__}                                                                            | Pedido suministros = {ID_Proveedor, Pieza, Cantidad_A_Suministrar, Stock_Actual, Stock_Mínimo} |
 | RF-5.a             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         | Alquileres = {ID_Alquiler, ID_Cliente, ID_Automovil, Fecha_Alquiler}        |
 | RF-5.b             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         | Clientes_Automóviles = {ID_Cliente, ID_Automovil}           |
 | RF-5.c             | Clientes = {__ID_Cliente__}  |  Automóviles = {__ID_Automovil__}                                                   |  Compras = {ID_Compra, ID_Cliente, ID_Automovil, Importe_Compra}                                                                            |
