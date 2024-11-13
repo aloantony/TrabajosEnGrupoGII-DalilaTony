@@ -1,9 +1,72 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0" version="24.8.6">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="24.8.6">
   <diagram name="Página-1" id="gJw8Lhun-Aa-bNbXO7BL">
-    <mxGraphModel dx="1674" dy="774" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1089" dy="1056" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="eUfo0shMedG3Ke2v0n19-6" value="Compras" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="800" y="480" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-7" value="Clientes" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="650" y="545" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-8" value="Alquileres" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="650" y="410" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-9" value="Piezas" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="40" y="430" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-10" value="Reparaciones" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="520" y="320" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-11" value="Automóviles" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="520" y="480" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-12" value="Proveedores" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="40" y="550" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-14" value="Garajes" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="520" y="620" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-15" value="Empleados" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="325" y="535" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-24" value="Dirige" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="330" y="430" width="70" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-36" value="Subordinado" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="eUfo0shMedG3Ke2v0n19-24">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="426" as="sourcePoint" />
+            <mxPoint x="325" y="535" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="285" y="456" />
+              <mxPoint x="285" y="535" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-37" value="1" style="resizable=0;html=1;whiteSpace=wrap;align=right;verticalAlign=bottom;" connectable="0" vertex="1" parent="eUfo0shMedG3Ke2v0n19-36">
+          <mxGeometry x="1" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-38" value="Jefe" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="eUfo0shMedG3Ke2v0n19-24" target="eUfo0shMedG3Ke2v0n19-15">
+          <mxGeometry x="0.0073" relative="1" as="geometry">
+            <mxPoint x="415" y="454" as="sourcePoint" />
+            <mxPoint x="445" y="526" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="445" y="454" />
+              <mxPoint x="445" y="535" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-39" value="N" style="resizable=0;html=1;whiteSpace=wrap;align=right;verticalAlign=bottom;" connectable="0" vertex="1" parent="eUfo0shMedG3Ke2v0n19-38">
+          <mxGeometry x="1" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="eUfo0shMedG3Ke2v0n19-10" target="eUfo0shMedG3Ke2v0n19-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eUfo0shMedG3Ke2v0n19-43" value="Realiza" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="310" y="320" width="110" height="80" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
