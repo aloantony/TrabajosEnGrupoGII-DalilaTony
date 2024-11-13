@@ -59,8 +59,8 @@
 |--------------------|--------------------------------|---------------------|-----------------------------------------------------------|-----------------------------|-----------------------------------------------------------|---------------------|--------------------|
 | RF-1.a             | Binaria                       | Empleados           | N    | Colaboran en reparaciones        | N    | Automóviles         |                |
 | RF-1.b             | Ternaria                      | Empleados           |      | Tiempo dedicado a reparaciones   |      | Reparaciones        | Automóviles    |
-| RF-1.c             | Binaria                       | Empleados           |      | Sueldo por hora                  |      |                     |                |
-| RF-1.d             | Binaria                       | Empleados           |      | Subordinado-Jefe                 |      | Empleados           |                |
+| RF-1.c             |                               | Empleados           |      | Sueldo por hora                  |      |                     |                |
+| RF-1.d             | Binaria                       | Empleados (jefes)   | 1     | Subordinado-Jefe                 | N     | Empleados (subordinados)|                |
 | RF-2.a             | Binaria                       | Reparaciones        | N    | Tiempo total de reparación       | 1    | Automóviles         |                |
 | RF-2.b             | Binaria                       | Reparaciones        | N    | Coste total de reparación        | 1    | Automóviles         |                |
 | RF-3.a             | Ternaria                      | Empleados           |      | Número de reparaciones           |      | Reparaciones        | Automóviles    |
@@ -72,7 +72,7 @@
 | RF-5.a             | Ternaria                      | Clientes            |      | Fechas de alquiler de automóviles|      | Automóviles         | Alquileres     |
 | RF-5.b             | Binaria                       | Clientes            | N    | Compra de automóviles            | N    | Automóviles         |                |
 | RF-5.c             | Ternaria                      | Clientes            |      | Importe de compra                |      | Automóviles         | Compras        |
-| RF-5.d             | Binaria                       | Automóviles         | 1    | Garaje de almacenamiento         | N    | Garajes             |                |
+| RF-5.d             | Binaria                       | Automóviles         | N    | Garaje de almacenamiento         | 1    | Garajes             |                |
 
 # PREGUNTAR EN EL FORO
 
