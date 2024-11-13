@@ -33,7 +33,7 @@
 
 --- 
 
-### Tabla de Requerimientos Funcionales
+### Tabla 1. Tabla de Requerimientos Funcionales
 
 | **Requerimiento** | **Descripción**                                                                                  |
 |-------------------|--------------------------------------------------------------------------------------------------|
@@ -54,7 +54,7 @@
 | **R5.c**          | El importe de compra de cada automóvil por cada persona compradora.                              |
 | **R5.d**          | Conocer el garaje en el que está almacenado cada automóvil de la empresa, sabiendo que en un mismo garaje pueden guardarse más de un automóvil. |
 
-### TAbla 2.
+### Tabla 2. Tabla de asociaciones entre los conjuntos de datos con sus cardinalidades
 | Nº Req. Funcional | Tipo Relación Binaria/Ternaria | Conjunto de Dato 1 | Cardinalidad del conjunto de Datos 2 con el Conj. Datos 1 | Asociación/Relación         | Cardinalidad del conjunto de Datos 1 con el Conj. Datos 2 | Conjunto de Dato 2 | Conjunto de Dato 3 |
 |--------------------|--------------------------------|---------------------|-----------------------------------------------------------|-----------------------------|-----------------------------------------------------------|---------------------|--------------------|
 | RF-1.a             | Binaria                       | Empleados           | N    | Colaboran en reparaciones        | N    | Automóviles         |                |
