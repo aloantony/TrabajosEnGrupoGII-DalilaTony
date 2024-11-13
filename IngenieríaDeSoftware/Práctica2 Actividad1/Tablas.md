@@ -74,5 +74,25 @@
 | RF-5.c             | Ternaria                      | Clientes            |      | Importe de compra                |      | Automóviles         | Compras        |
 | RF-5.d             | Binaria                       | Automóviles         | N    | Garaje de almacenamiento         | 1    | Garajes             |                |
 
+### Tabla 3.
+| Nº Req. Funcional | Conjunto de Datos 1                                        | Conjunto de Datos 2                                      | Conjunto de Datos 3                                                          |
+|--------------------|------------------------------------------------------------|----------------------------------------------------------|------------------------------------------------------------------------------|
+| RF-1.a             | Empleados = {__ID_Empleado__}                              | Automóviles = {__ID_Automovil__}                         |                                                                              |
+| RF-1.b             | Empleados = {__ID_Empleado__}                              | Reparaciones = {__ID_Reparacion__, Tiempo}               | Automóviles = {__ID_Automovil__}                                             |
+| RF-1.c             | Empleados = {__ID_Empleado__, Sueldo}                      |                                                          |                                                                              |
+| RF-1.d             | Empleados = {__ID_Empleado__, ID_Jefe}                     | Empleados = {__ID_Empleado__}                            |                                                                              |
+| RF-2.a             | Reparaciones = {__ID_Reparacion__, tiempoReparación}       | Automóviles = {__ID_Automovil__}                         |                                                                              |
+| RF-2.b             | Reparaciones = {__ID_Reparacion__, costeReparación}        | Automóviles = {__ID_Automovil__}                         |                                                                              |
+| RF-3.a             | Empleados = {__ID_Empleado__}                              | Reparaciones = {__ID_Reparacion__}                       | Automóviles = {__ID_Automovil__}                                             |
+| RF-3.b             | Empleados = {__ID_Empleado__}                              | Reparaciones = {__ID_Reparacion__, Fecha}                | Automóviles = {__ID_Automovil__}                                             |
+| RF-4.a             | Piezas = {__ID_Pieza_Única__, Nombre_Pieza, Color}         | Automóviles = {__ID_Automovil__}                         |                                                                              |
+| RF-4.b             | Proveedores = {__ID_Proveedor__}                           | Piezas = {__ID_Pieza_Única__}                            |                                                                              |
+| RF-4.c             | Proveedores = {__ID_Proveedor__}                           | Piezas = {__ID_Pieza_Única__}                            | Proveedores_Piezas = {ID_Proveedor, ID_Pieza_Única, Precio}                 |
+| RF-4.d             | Piezas = {__ID_Pieza_Única__, Nombre_Pieza, Stock_Actual, Stock_Mínimo} | Suministros = {ID_Proveedor, ID_Pieza_Única, Cantidad_A_Suministrar} |                                                                              |
+| RF-5.a             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         | Alquileres = {ID_Alquiler, ID_Cliente, ID_Automovil, Fecha_Alquiler}        |
+| RF-5.b             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         | Clientes_Automóviles = {ID_Cliente, ID_Automovil, Importe_Compra}           |
+| RF-5.c             | Clientes = {__ID_Cliente__}  |  Automóviles = {__ID_Automovil__}                                                   |  Clientes_Automóviles = {ID_Cliente, ID_Automovil, Importe_Compra}                                                                            |
+| RF-5.d             | Automóviles = {__ID_Automovil__}                           | Garajes = {__ID_Garaje__}                                |                                                                              |
+
 # PREGUNTAR EN EL FORO
 
