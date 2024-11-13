@@ -91,7 +91,7 @@
 | RF-4.d             | Suministros = {ID_Proveedor, ID_Pieza_Única, Cantidad_A_Suministrar} | Piezas = {__ID_Pieza_Única__, Nombre_Pieza, Stock_Actual, Stock_Mínimo} |  Proveedores = {__ID_Proveedor__}                                                                            |
 | RF-5.a             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         | Alquileres = {ID_Alquiler, ID_Cliente, ID_Automovil, Fecha_Alquiler}        |
 | RF-5.b             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         | Clientes_Automóviles = {ID_Cliente, ID_Automovil, Importe_Compra}           |
-| RF-5.c             | Clientes = {__ID_Cliente__}  |  Automóviles = {__ID_Automovil__}                                                   |  Clientes_Automóviles = {ID_Cliente, ID_Automovil, Importe_Compra}                                                                            |
+| RF-5.c             | Clientes = {__ID_Cliente__}  |  Automóviles = {__ID_Automovil__}                                                   |  Compras = {ID_Compra, ID_Cliente, ID_Automovil, Importe_Compra}                                                                            |
 | RF-5.d             | Automóviles = {__ID_Automovil__}                           | Garajes = {__ID_Garaje__}                                |                                                                              |
 
 # PREGUNTAR EN EL FORO
