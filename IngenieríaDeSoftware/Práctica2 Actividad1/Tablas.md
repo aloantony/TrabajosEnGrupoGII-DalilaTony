@@ -85,13 +85,13 @@
 | RF-2.b             | Reparaciones = {__ID_Reparacion__, costeReparación}        | Automóviles = {__ID_Automovil__}                         |                                                                              |
 | RF-3.a             | Empleados = {__ID_Empleado__}                              | Reparaciones = {__ID_Reparacion__}                       | Automóviles = {__ID_Automovil__}                                             |
 | RF-3.b             | Empleados = {__ID_Empleado__}                              | Reparaciones = {__ID_Reparacion__,__ID_Empleado__,__ID_Automovil__, Fecha}                | Automóviles = {__ID_Automovil__}                                             |
-| RF-4.a             | Piezas = {__ID_Pieza_Única__, Nombre_Pieza, Color}         | Automóviles = {__ID_Automovil__}                         |                                                                              |
-| RF-4.b             | Proveedores = {__ID_Proveedor__}                           | Piezas = {Nombre_Pieza}                            |                                                                              |
-| RF-4.c             | Proveedores = {__ID_Proveedor__}                           | Piezas = {Nombre_Pieza}                            | Proveedores_Piezas = {ID_Proveedor, Nombre_Pieza, Precio}                 |
-| RF-4.d             | Piezas = {__ID_Pieza_Única__, Nombre_Pieza} |  Proveedores = {__ID_Proveedor__}                                                                            | Pedido suministros = {ID_Proveedor, Nombre_Pieza, Cantidad_A_Suministrar, Stock_Actual, Stock_Mínimo} |
-| RF-5.a             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         | Alquileres = {ID_Alquiler, ID_Cliente, ID_Automovil, Fecha_Alquiler}        |
-| RF-5.b             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         | Clientes_Automóviles = {ID_Cliente, ID_Automovil}           |
-| RF-5.c             | Clientes = {__ID_Cliente__}  |  Automóviles = {__ID_Automovil__}                                                   |  Compras = {ID_Compra, ID_Cliente, ID_Automovil, Importe_Compra}                                                                            |
+| RF-4.a             | Piezas = {__Pieza__, Stock_Actual, Stock_Mínimo, Color}         | Automóviles = {__ID_Automovil__}                         |                                                                              |
+| RF-4.b             | Proveedores = {__ID_Proveedor__}                           | Piezas = {__Pieza__}                            |                                                                              |
+| RF-4.c             | Proveedores = {__ID_Proveedor__}                           | Piezas = {__Pieza__, Stock_Actual, Stock_Mínimo, color}                            |                |
+| RF-4.d             | Piezas = {__ID_Pieza_Única__, Pieza} |  Proveedores = {__ID_Proveedor__}                                                                            | Pedido suministros = {ID_Proveedor,__Pieza__, Cantidad_A_Suministrar, Stock_Actual, Stock_Mínimo} |
+| RF-5.a             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         | Alquileres = {ID_Alquiler}        |
+| RF-5.b             | Clientes = {__ID_Cliente__}                                | Automóviles = {__ID_Automovil__}                         |            |
+| RF-5.c             | Clientes = {__ID_Cliente__}  |  Automóviles = {__ID_Automovil__}                                                   |                                                                              |
 | RF-5.d             | Automóviles = {__ID_Automovil__}                           | Garajes = {__ID_Garaje__}                                |                                                                              |
 
 
