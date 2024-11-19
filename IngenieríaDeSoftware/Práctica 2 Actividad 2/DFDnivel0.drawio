@@ -21,9 +21,10 @@
         <mxCell id="3CDc8pTSTMtiO1tMc391-2" value="Clientes" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-20" y="110" width="170" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="3CDc8pTSTMtiO1tMc391-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=-0.001;exitY=0.6;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.987;entryY=0.575;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="3CDc8pTSTMtiO1tMc391-29" target="3CDc8pTSTMtiO1tMc391-1">
+        <mxCell id="3CDc8pTSTMtiO1tMc391-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=-0.001;exitY=0.6;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.988;entryY=0.636;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="3CDc8pTSTMtiO1tMc391-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="620" y="155" as="sourcePoint" />
+            <mxPoint x="709.9999999999999" y="170.7500000000001" as="sourcePoint" />
+            <mxPoint x="480" y="170" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="3CDc8pTSTMtiO1tMc391-24" value="Datos clave" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="3CDc8pTSTMtiO1tMc391-5">
