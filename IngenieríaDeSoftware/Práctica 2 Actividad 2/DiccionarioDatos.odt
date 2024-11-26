@@ -1,0 +1,197 @@
+### Diccionario de Datos
+
+1. **Servicios (Almacén de Datos)**  
+   = @ID de servicio + Nombre del servicio + Descripción + Área responsable + Precio + (Promociones)  
+
+   - **@ID de servicio**  
+     = *Clave principal del almacén que identifica de forma única al servicio*  
+     *Valores*: {1-9}{0-9}{4,}  
+
+   - **Nombre del servicio**  
+     = *Nombre descriptivo del servicio ofrecido*  
+     *Formato*: Texto libre  
+
+   - **Descripción**  
+     = *Detalle textual sobre el servicio y sus características*  
+     *Formato*: Texto libre  
+
+   - **Área responsable**  
+     = [Soporte técnico | Ventas]  
+
+   - **Precio**  
+     = *Coste del servicio*  
+     *Unidades*: Moneda local
+
+1. **Solicitud de servicio**  
+   = @ID de cliente + Tipo de servicio + Descripción del servicio  
+
+   - **@ID de cliente**  
+     = *Identificador único del cliente*  
+     *Valores*: [1-9][0-9]{4,} (Numérico, entero positivo)  
+
+   - **Tipo de servicio**  
+     = [Soporte técnico | Comercial]  
+
+   - **Descripción del servicio**  
+     = *Detalle textual del servicio requerido*  
+     *Formato*: Texto libre  
+
+---
+
+2. **Envío de solicitudes**  
+   = @ID de servicio + ID de cliente + Detalle de la solicitud  
+
+   - **ID de servicio**  
+     = *Identificador único del servicio relacionado con la solicitud*  
+     *Valores*: {1-9}{0-9}{4,}  
+
+   - **ID de cliente**  
+     = *Identificador único del cliente que realiza la solicitud*  
+     *Valores*: {1-9}{0-9}{4,}  
+
+   - **Detalle de la solicitud**  
+     = *Información específica relacionada con los datos clave solicitados*  
+     *Formato*: Texto libre
+
+---
+
+
+
+---
+
+2. **Solicitudes de los datos clave para los servicios solicitados**  
+   = ID de servicio + Tipo de datos clave  
+
+   - **ID de servicio**  
+     = *Identificador único del servicio requerido por el cliente*  
+     *Valores*: {1-9}{0-9}{4,}  
+
+   - **Tipo de datos clave**  
+     = [Licencias | Componentes | Actualizaciones]
+
+---
+
+3. **Estado de las peticiones**  
+   = @ID de cliente + @ID de servicio + Estado  
+
+  - **@ID de cliente**  
+     = *Identificador único del cliente que realiza la solicitud*  
+     *Valores*: {1-9}{0-9}{4,}   
+
+  - **@ID de servicio**  
+     = *Identificador único del servicio relacionado con el informe de satisfacción*  
+     *Valores*: {1-9}{0-9}{4,}  
+
+  - **Estado**  
+     = [Pendiente | En proceso | Completado | Cancelado]  
+
+---
+
+1. **Envío del ID_Servicio hacia el almacén de informes de satisfacción**  
+   = @ID de servicio  
+
+   - **ID de servicio**  
+     = *Identificador único del servicio relacionado con el informe de satisfacción*  
+     *Valores*: {1-9}{0-9}{4,}  
+
+---
+
+1. **Envío del ID_Cliente hacia el almacén de informes de satisfacción**  
+   = @ID de cliente  
+
+   - **@ID de cliente**  
+     = *Identificador único del cliente que realiza el informe de satisfacción*  
+     *Valores*: {1-9}{0-9}{4,}  
+
+---
+
+3. **Informes de satisfacción**  
+   = @ID de cliente + @ID de servicio + Puntuación + Comentarios  
+
+  - **@ID de cliente**  
+     = *Identificador único del cliente que realiza la solicitud*  
+     *Valores*: {1-9}{0-9}{4,}  
+
+  - **@ID de servicio**  
+     = *Identificador único del servicio relacionado con el informe de satisfacción*  
+     *Valores*: {1-9}{0-9}{4,}  
+
+   - **Puntuación**  
+     = *Valoración del cliente sobre el servicio*  
+     *Valores*: [1-5]  
+     *Unidades*: Escala ordinal  
+
+   - **Comentarios**  
+     = *Opiniones del cliente sobre el servicio recibido*  
+     *Formato*: Texto libre  
+
+---
+
+4. **Datos clave**  
+   = @ID de proveedor + Tipo de datos + Detalle  
+
+   - **Tipo de datos**  
+     = [Licencias | Componentes | Actualizaciones]  
+
+---
+
+6. **Historial de asistencia del cliente**  
+   = @ID de cliente + Fechas de asistencia + Descripción de los casos  
+
+   - **Fechas de asistencia**  
+     = *Registro temporal de las asistencias realizadas*  
+     *Formato*: AAAA-MM-DD  
+
+---
+
+7. **Información del cliente**  
+   = @ID de cliente + Nombre + Dirección + Contacto + Información adicional  
+
+   - **Nombre**  
+     = *Nombre completo del cliente*  
+     *Formato*: Texto libre  
+
+   - **Dirección**  
+     = *Dirección física del cliente*  
+     *Formato*: Texto libre  
+
+   - **Contacto**  
+     = *Teléfono o correo electrónico del cliente*  
+     *Formato*: Texto libre  
+
+   - **Información adicional**  
+     = *Datos relevantes adicionales sobre el cliente*  
+     *Formato*: Texto libre
+
+---
+
+#### **Datos Comerciales del Servicio (Almacén de Datos)**  
+   = @ID de servicio + Nombre del servicio + Precio + Descripción
+
+   - **@ID de servicio**  
+     = *Clave principal del almacén que identifica de forma única al servicio comercial*  
+     *Valores*: {1-9}{0-9}{4,}  
+
+   - **Nombre del servicio**  
+     = *Nombre descriptivo del servicio comercial*  
+     *Formato*: Texto libre  
+
+   - **Precio**  
+     = *Coste monetario del servicio comercial*  
+     *Unidades*: Moneda local  
+
+   - **Descripción**  
+     = *Detalle del servicio ofrecido*  
+     *Formato*: Texto libre
+
+---
+
+1. **Solicitud de datos comerciales del servicio**  
+   = @ID de servicio + Tipo de información comercial  
+
+   - **@ID de servicio**  
+     = *Identificador único del servicio solicitado*  
+     *Valores*: {1-9}{0-9}{4,}  
+
+   - **Tipo de información comercial**  
+     = [Precio | Descripción del servicio]
