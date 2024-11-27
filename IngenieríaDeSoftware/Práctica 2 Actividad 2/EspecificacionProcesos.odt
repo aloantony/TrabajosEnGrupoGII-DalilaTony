@@ -1,0 +1,118 @@
+INICIO GestiónSolicitudesServicio
+
+    // Entrada inicial: Solicitud del cliente
+    Entrada solicitud:
+        - ID_Cliente
+        - Tipo_Servicio
+        - Descripción_Servicio
+
+    // Salida esperada: Confirmación y almacenamiento de solicitud
+    Salida:
+        - ID_Solicitud
+        - Estado ("Pendiente")
+        - Mensaje de confirmación al cliente
+
+    // Paso 1: Validación de los datos de la solicitud
+    SI ID_Cliente ES VÁLIDO Y Tipo_Servicio EN ["Soporte técnico", "Comercial"] ENTONCES
+        Proceder
+    SINO
+        Mostrar "Error: Datos inválidos. Revise ID del cliente o tipo de servicio."
+        TERMINAR
+
+    // Paso 2: Generación de ID único para la solicitud
+    Generar ID_Solicitud = CrearIDÚnico()
+
+    // Paso 3: Verificar disponibilidad del servicio
+    SI VerificarServicio(Tipo_Servicio) = "Disponible" ENTONCES
+        Estado_Solicitud = "Pendiente"
+    SINO
+        Estado_Solicitud = "Rechazada"
+        Mostrar "El servicio solicitado no está disponible en este momento."
+        TERMINAR
+
+    // Paso 4: Registro de la solicitud en el almacén de datos
+    Almacenar En Solicitudes:
+        - ID_Solicitud
+        - ID_Cliente
+        - Tipo_Servicio
+        - Descripción_Servicio
+        - Estado_Solicitud
+
+    // Paso 5: Notificación al cliente
+    SI Estado_Solicitud = "Pendiente" ENTONCES
+        EnviarMensaje(ID_Cliente, "Su solicitud ha sido registrada exitosamente con ID " + ID_Solicitud)
+    SINO
+        EnviarMensaje(ID_Cliente, "Su solicitud ha sido rechazada. Contacte con el soporte.")
+
+    // Fin del proceso
+    Mostrar "Proceso completado exitosamente."
+
+FIN GestiónSolicitudesServicio
+
+
+---
+
+
+INICIO ActualizarInformacionCliente
+
+    // Entrada inicial: Datos individuales enviados por el cliente
+    Entrada:
+        - ID_Cliente
+        - (Nombre)
+        - (Dirección)
+        - (Contacto)
+        - (Información adicional)
+
+    // Salida esperada: Confirmación de la actualización
+    Salida:
+        - Mensaje de confirmación al cliente
+        - Registro actualizado en el almacén de clientes
+
+    // Paso 1: Validación de ID del cliente
+    SI ID_Cliente EXISTE EN Almacén_Clientes ENTONCES
+        Proceder
+    SINO
+        Mostrar "Error: ID del cliente no válido."
+        TERMINAR
+
+    // Paso 2: Validación de cada campo individual
+    SI Nombre NO ES NULO Y ES VÁLIDO ENTONCES
+        Proceder
+    SINO
+        Ignorar
+
+    SI Dirección NO ES NULA Y ES VÁLIDA ENTONCES
+        Proceder
+    SINO
+        Ignorar
+
+    SI Contacto NO ES NULO Y ES VÁLIDO ENTONCES
+        Proceder
+    SINO
+        Ignorar
+
+    SI Información adicional NO ES NULA ENTONCES
+        Proceder
+    SINO
+        Ignorar
+
+    // Paso 3: Actualización en el almacén
+    Acceder Informacion_clientes DONDE ID_Cliente = Entrada.ID_Cliente
+    SI Registro_Encontrado ENTONCES
+        SI Nombre NO ES NULO ENTONCES
+            Actualizar Nombre EN Almacén_Clientes
+        SI Dirección NO ES NULA ENTONCES
+            Actualizar Dirección EN Almacén_Clientes
+        SI Contacto NO ES NULO ENTONCES
+            Actualizar Contacto EN Almacén_Clientes
+        SI Información adicional NO ES NULA ENTONCES
+            Actualizar Información adicional EN Almacén_Clientes
+    SINO
+        Mostrar "Error: Cliente no encontrado."
+        TERMINAR
+
+    // Paso 4: Confirmación de la actualización
+    EnviarMensaje(ID_Cliente, "Su información ha sido actualizada exitosamente.")
+    Mostrar "Proceso completado exitosamente."
+
+FIN ActualizarInformacionCliente
