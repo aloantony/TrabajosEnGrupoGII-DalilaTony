@@ -22,7 +22,7 @@
      = *Coste del servicio*  
      *Unidades*: Moneda local
 
-1. **Solicitud de servicio**  
+2. **Solicitud de servicio**  
    = @ID de cliente + Tipo de servicio + Descripción del servicio  
 
    - **@ID de cliente**  
@@ -38,7 +38,7 @@
 
 ---
 
-2. **Envío de solicitudes**  
+3. **Envío de solicitudes**  
    = @ID de servicio + ID de cliente + Detalle de la solicitud  
 
    - **ID de servicio**  
@@ -55,11 +55,7 @@
 
 ---
 
-
-
----
-
-2. **Solicitudes de los datos clave para los servicios solicitados**  
+4. **Solicitudes de los datos clave para los servicios solicitados**  
    = ID de servicio + Tipo de datos clave  
 
    - **ID de servicio**  
@@ -71,7 +67,7 @@
 
 ---
 
-3. **Estado de las peticiones**  
+5. **Estado de las peticiones**  
    = @ID de cliente + @ID de servicio + Estado  
 
   - **@ID de cliente**  
@@ -87,7 +83,7 @@
 
 ---
 
-1. **Envío del ID_Servicio hacia el almacén de informes de satisfacción**  
+6. **Envío del ID_Servicio hacia el almacén de informes de satisfacción**  
    = @ID de servicio  
 
    - **ID de servicio**  
@@ -96,7 +92,7 @@
 
 ---
 
-1. **Envío del ID_Cliente hacia el almacén de informes de satisfacción**  
+7. **Envío del ID_Cliente hacia el almacén de informes de satisfacción**  
    = @ID de cliente  
 
    - **@ID de cliente**  
@@ -105,7 +101,7 @@
 
 ---
 
-3. **Informes de satisfacción**  
+8. **Informes de satisfacción**  
    = @ID de cliente + @ID de servicio + Puntuación + Comentarios  
 
   - **@ID de cliente**  
@@ -127,7 +123,7 @@
 
 ---
 
-4. **Datos clave**  
+9. **Datos clave**  
    = @ID de proveedor + Tipo de datos + Detalle  
 
    - **Tipo de datos**  
@@ -135,7 +131,7 @@
 
 ---
 
-6. **Historial de asistencia del cliente**  
+10. **Historial de asistencia del cliente**  
    = @ID de cliente + Fechas de asistencia + Descripción de los casos  
 
    - **Fechas de asistencia**  
@@ -144,7 +140,7 @@
 
 ---
 
-7. **Información del cliente**  
+11. **Información del cliente**  
    = @ID de cliente + Nombre + Dirección + Contacto + Información adicional  
 
    - **Nombre**  
@@ -165,7 +161,7 @@
 
 ---
 
-#### **Datos Comerciales del Servicio (Almacén de Datos)**  
+12. **Datos Comerciales del Servicio (Almacén de Datos)**  
    = @ID de servicio + Nombre del servicio + Precio + Descripción
 
    - **@ID de servicio**  
@@ -186,7 +182,7 @@
 
 ---
 
-1. **Solicitud de datos comerciales del servicio**  
+13. **Solicitud de datos comerciales del servicio**  
    = @ID de servicio + Tipo de información comercial  
 
    - **@ID de servicio**  
