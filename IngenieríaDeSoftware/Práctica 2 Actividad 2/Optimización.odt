@@ -1,4 +1,4 @@
-Agrupación de flujos de envío de solicitudes necesarias para el servicio.
+1. Agrupación de flujos de envío de solicitudes necesarias para el servicio.
 
     Problema: Actualmente, existen flujos independientes para Solicitud de datos clave y Solicitud de datos comerciales, lo que introduce redundancia en los procesos.
     Propuesta: Unificar estos flujos en un único flujo llamado Solicitud de datos del servicio. Este flujo incluiría una especificación del tipo de datos solicitados, reduciendo duplicidad.
@@ -10,3 +10,28 @@ Agrupación de flujos de envío de solicitudes necesarias para el servicio.
         Tipo de dato solicitado: [Clave | Comercial].
     Explicación:
         Según el tipo de dato de la solicitud se tramitará el envío a órgano receptor correspondiente.
+
+2. Cache de Consultas Frecuentes
+
+    Problema: Las consultas a los almacenes de datos pueden volverse lentas cuando los datos son grandes.
+    Propuesta: Implementar una cache para almacenar temporalmente datos de solicitudes recientes o servicios más consultados.
+    Beneficios:
+        Reduce el tiempo de respuesta en procesos que requieren consultar los mismos datos repetidamente.
+        Optimiza el uso del sistema de almacenamiento.
+    Procedimiento:
+        Identificar las consultas más frecuentes (e.g., datos de servicios populares).
+        Configurar un cache en memoria para almacenar resultados temporales.
+        Actualizar la cache automáticamente al modificar los datos relevantes.
+
+3. Automatización de Asignación de Áreas Responsables
+
+    Problema: La asignación de áreas responsables en algunos procesos es manual y depende de la lógica de cada solicitud.
+    Propuesta: Añadir reglas automatizadas basadas en atributos del servicio, cliente o solicitud.
+    Beneficios:
+        Acelera el procesamiento.
+        Reduce la posibilidad de errores humanos.
+    Procedimiento:
+        Configurar una tabla de reglas que asocie atributos con áreas responsables.
+        Implementar un motor de reglas en el proceso de gestión de solicitudes.
+
+
