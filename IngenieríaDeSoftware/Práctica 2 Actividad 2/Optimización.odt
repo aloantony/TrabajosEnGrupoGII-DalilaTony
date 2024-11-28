@@ -1,0 +1,12 @@
+Agrupación de flujos de envío de solicitudes necesarias para el servicio.
+
+    Problema: Actualmente, existen flujos independientes para Solicitud de datos clave y Solicitud de datos comerciales, lo que introduce redundancia en los procesos.
+    Propuesta: Unificar estos flujos en un único flujo llamado Solicitud de datos del servicio. Este flujo incluiría una especificación del tipo de datos solicitados, reduciendo duplicidad.
+    Beneficios:
+        Disminuye la complejidad del modelo.
+        Facilita la extensión para añadir más tipos de datos en el futuro.
+    Procedimiento:
+        Solicitud de datos del servicio = ID de servicio + Tipo de dato solicitado.
+        Tipo de dato solicitado: [Clave | Comercial].
+    Explicación:
+        Según el tipo de dato de la solicitud se tramitará el envío a órgano receptor correspondiente.
