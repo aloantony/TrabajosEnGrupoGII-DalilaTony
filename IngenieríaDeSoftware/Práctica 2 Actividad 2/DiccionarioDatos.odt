@@ -5,7 +5,7 @@
 
    - **@ID de servicio**  
      = *Clave principal del almacén que identifica de forma única al servicio*  
-     *Valores*: {1-9}{0-9}{4,}  
+     *Formato*: [1-9][0-9]{4,} (Número entero de al menos 4 dígitos).
 
    - **Nombre del servicio**  
      = *Nombre descriptivo del servicio ofrecido*  
@@ -22,12 +22,18 @@
      = *Coste del servicio*  
      *Unidades*: Moneda local
 
+   - **Promociones**
+      = Información adicional sobre descuentos o promociones. 
+      *Formato*: Texto libre
+
+---
+
 2. **Solicitud de servicio**  
    = @ID de cliente + Tipo de servicio + Descripción del servicio  
 
    - **@ID de cliente**  
      = *Identificador único del cliente*  
-     *Valores*: [1-9][0-9]{4,} (Numérico, entero positivo)  
+     *Formato*: [1-9][0-9]{4,} (Numérico, entero positivo)  
 
    - **Tipo de servicio**  
      = [Soporte técnico | Comercial]  
@@ -39,15 +45,15 @@
 ---
 
 3. **Envío de solicitudes**  
-   = @ID de servicio + ID de cliente + Detalle de la solicitud  
+   = @ID de servicio + @ID de cliente + Detalle de la solicitud  
 
    - **ID de servicio**  
      = *Identificador único del servicio relacionado con la solicitud*  
      *Valores*: {1-9}{0-9}{4,}  
 
-   - **ID de cliente**  
-     = *Identificador único del cliente que realiza la solicitud*  
-     *Valores*: {1-9}{0-9}{4,}  
+   - **@ID de cliente**  
+     = *Identificador único del cliente*  
+     *Formato*: [1-9][0-9]{4,} (Numérico, entero positivo)  
 
    - **Detalle de la solicitud**  
      = *Información específica relacionada con los datos clave solicitados*  
@@ -56,11 +62,11 @@
 ---
 
 4. **Solicitudes de los datos clave para los servicios solicitados**  
-   = ID de servicio + Tipo de datos clave  
+   = @ID de servicio + Tipo de datos clave  
 
-   - **ID de servicio**  
-     = *Identificador único del servicio requerido por el cliente*  
-     *Valores*: {1-9}{0-9}{4,}  
+   - **@ID de servicio**  
+     = *Clave principal del almacén que identifica de forma única al servicio*  
+     *Formato*: [1-9][0-9]{4,} (Número entero de al menos 4 dígitos).
 
    - **Tipo de datos clave**  
      = [Licencias | Componentes | Actualizaciones]
@@ -71,12 +77,12 @@
    = @ID de cliente + @ID de servicio + Estado  
 
   - **@ID de cliente**  
-     = *Identificador único del cliente que realiza la solicitud*  
-     *Valores*: {1-9}{0-9}{4,}   
+     = *Identificador único del cliente*  
+     *Formato*: [1-9][0-9]{4,} (Numérico, entero positivo)   
 
   - **@ID de servicio**  
-     = *Identificador único del servicio relacionado con el informe de satisfacción*  
-     *Valores*: {1-9}{0-9}{4,}  
+     = *Clave principal del almacén que identifica de forma única al servicio*  
+     *Formato*: [1-9][0-9]{4,} (Número entero de al menos 4 dígitos). 
 
   - **Estado**  
      = [Pendiente | En proceso | Completado | Cancelado]  
@@ -86,9 +92,9 @@
 6. **Envío del ID_Servicio hacia el almacén de informes de satisfacción**  
    = @ID de servicio  
 
-   - **ID de servicio**  
-     = *Identificador único del servicio relacionado con el informe de satisfacción*  
-     *Valores*: {1-9}{0-9}{4,}  
+   - **@ID de servicio**  
+     = *Clave principal del almacén que identifica de forma única al servicio*  
+     *Formato*: [1-9][0-9]{4,} (Número entero de al menos 4 dígitos). 
 
 ---
 
@@ -96,8 +102,8 @@
    = @ID de cliente  
 
    - **@ID de cliente**  
-     = *Identificador único del cliente que realiza el informe de satisfacción*  
-     *Valores*: {1-9}{0-9}{4,}  
+     = *Identificador único del cliente*  
+     *Formato*: [1-9][0-9]{4,} (Numérico, entero positivo)   
 
 ---
 
@@ -105,12 +111,12 @@
    = @ID de cliente + @ID de servicio + Puntuación + Comentarios  
 
   - **@ID de cliente**  
-     = *Identificador único del cliente que realiza la solicitud*  
-     *Valores*: {1-9}{0-9}{4,}  
+     = *Identificador único del cliente*  
+     *Formato*: [1-9][0-9]{4,} (Numérico, entero positivo)   
 
   - **@ID de servicio**  
-     = *Identificador único del servicio relacionado con el informe de satisfacción*  
-     *Valores*: {1-9}{0-9}{4,}  
+     = *Clave principal del almacén que identifica de forma única al servicio*  
+     *Formato*: [1-9][0-9]{4,} (Número entero de al menos 4 dígitos). 
 
    - **Puntuación**  
      = *Valoración del cliente sobre el servicio*  
@@ -125,23 +131,40 @@
 
 9. **Datos clave**  
    = @ID de proveedor + Tipo de datos + Detalle  
+   - **@ID de proveedor**
+      Descripción: Identificador único del proveedor.
+      *Formato*: Texto libre.
 
    - **Tipo de datos**  
      = [Licencias | Componentes | Actualizaciones]  
+
+   - **Detalle**
+      Descripción: Información adicional sobre los datos clave.
+      *Formato*: Texto libre.
 
 ---
 
 10. **Historial de asistencia del cliente**  
    = @ID de cliente + Fechas de asistencia + Descripción de los casos  
+   - **@ID de cliente**  
+     = *Identificador único del cliente*  
+     *Formato*: [1-9][0-9]{4,} (Numérico, entero positivo)  
 
    - **Fechas de asistencia**  
      = *Registro temporal de las asistencias realizadas*  
      *Formato*: AAAA-MM-DD  
 
+   -  **Descripción de los casos**
+      Descripción: Detalle textual de los casos atendidos.
+      *Formato*: Texto libre.
+
 ---
 
 11. **Información del cliente**  
    = @ID de cliente + Nombre + Dirección + Contacto + Información adicional  
+   - **@ID de cliente**  
+     = *Identificador único del cliente*  
+     *Formato*: [1-9][0-9]{4,} (Numérico, entero positivo)  
 
    - **Nombre**  
      = *Nombre completo del cliente*  
@@ -165,8 +188,8 @@
    = @ID de servicio + Nombre del servicio + Precio + Descripción
 
    - **@ID de servicio**  
-     = *Clave principal del almacén que identifica de forma única al servicio comercial*  
-     *Valores*: {1-9}{0-9}{4,}  
+     = *Clave principal del almacén que identifica de forma única al servicio*  
+     *Formato*: [1-9][0-9]{4,} (Número entero de al menos 4 dígitos). 
 
    - **Nombre del servicio**  
      = *Nombre descriptivo del servicio comercial*  
@@ -186,8 +209,8 @@
    = @ID de servicio + Tipo de información comercial  
 
    - **@ID de servicio**  
-     = *Identificador único del servicio solicitado*  
-     *Valores*: {1-9}{0-9}{4,}  
+     = *Clave principal del almacén que identifica de forma única al servicio*  
+     *Formato*: [1-9][0-9]{4,} (Número entero de al menos 4 dígitos).  
 
    - **Tipo de información comercial**  
      = [Precio | Descripción del servicio]
