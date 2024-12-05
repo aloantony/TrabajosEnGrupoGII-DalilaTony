@@ -47,7 +47,7 @@
           <mxGeometry x="640" y="-935" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="04urakdWcX9fBKobl6bI-17" value="Jugadores" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="175" y="-845" width="120" height="60" as="geometry" />
+          <mxGeometry x="170" y="-840" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="04urakdWcX9fBKobl6bI-18" value="Nombre_completo" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="35" y="-715" width="110" height="60" as="geometry" />
@@ -59,16 +59,16 @@
           <mxGeometry x="15" y="-795" width="90" height="60" as="geometry" />
         </mxCell>
         <mxCell id="04urakdWcX9fBKobl6bI-21" value="Peso" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="75" y="-645" width="70" height="50" as="geometry" />
+          <mxGeometry x="200" y="-910" width="70" height="50" as="geometry" />
         </mxCell>
         <mxCell id="04urakdWcX9fBKobl6bI-22" value="Estatura" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="115" y="-595" width="110" height="60" as="geometry" />
+          <mxGeometry x="75" y="-960" width="110" height="60" as="geometry" />
         </mxCell>
         <mxCell id="04urakdWcX9fBKobl6bI-23" value="Fecha_final_contrato" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="165" y="-755" width="120" height="60" as="geometry" />
+          <mxGeometry x="150" y="-680" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="04urakdWcX9fBKobl6bI-24" value="Importe" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="175" y="-670" width="100" height="60" as="geometry" />
+          <mxGeometry x="145" y="-760" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="04urakdWcX9fBKobl6bI-25" value="Lances" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="475" y="480" width="120" height="60" as="geometry" />
