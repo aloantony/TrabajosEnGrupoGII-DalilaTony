@@ -104,7 +104,7 @@
           <mxGeometry x="475" y="-847.5" width="75" height="30" as="geometry" />
         </mxCell>
         <mxCell id="inNDsGXoUcWYAkGI4Rf3-1" value="fecha" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="314" y="-670" width="75" height="40" as="geometry" />
+          <mxGeometry x="376.5" y="-650" width="75" height="40" as="geometry" />
         </mxCell>
         <mxCell id="inNDsGXoUcWYAkGI4Rf3-2" value="resultado_local" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="517.5" y="-620" width="100" height="40" as="geometry" />
@@ -183,7 +183,7 @@
           <mxGeometry x="727.5" y="-500" width="75" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Gta5DQi-riPikVPDDbvj-6" value="asistentes" style="ellipse;shape=doubleEllipse;margin=3;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
-          <mxGeometry x="715" y="-630" width="100" height="40" as="geometry" />
+          <mxGeometry x="725" y="-607" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="Gta5DQi-riPikVPDDbvj-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Gta5DQi-riPikVPDDbvj-8" target="Gta5DQi-riPikVPDDbvj-18">
           <mxGeometry relative="1" as="geometry" />
