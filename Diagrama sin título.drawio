@@ -41,10 +41,10 @@
           <mxGeometry x="440" y="-90" width="130" height="60" as="geometry" />
         </mxCell>
         <mxCell id="04urakdWcX9fBKobl6bI-15" value="Árbitros" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="485" y="250" width="120" height="60" as="geometry" />
+          <mxGeometry x="90" y="200" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="04urakdWcX9fBKobl6bI-16" value="Equipo_arbitral" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="165" y="-670" width="120" height="60" as="geometry" />
+          <mxGeometry x="95" y="-770" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="04urakdWcX9fBKobl6bI-17" value="Jugadores" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="240" y="-450" width="120" height="60" as="geometry" />
@@ -92,16 +92,16 @@
           <mxGeometry x="702.5" y="-630" width="105" height="70" as="geometry" />
         </mxCell>
         <mxCell id="inNDsGXoUcWYAkGI4Rf3-3" value="jornada/fase" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="710" y="-230" width="90" height="60" as="geometry" />
+          <mxGeometry x="440" y="-180" width="90" height="60" as="geometry" />
         </mxCell>
         <mxCell id="inNDsGXoUcWYAkGI4Rf3-6" value="resultado_visitante" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="520" y="-710" width="100" height="70" as="geometry" />
         </mxCell>
         <mxCell id="inNDsGXoUcWYAkGI4Rf3-7" value="fase" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="590" y="-30" width="120" height="60" as="geometry" />
+          <mxGeometry x="590" y="-260" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="inNDsGXoUcWYAkGI4Rf3-8" value="jornada" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="730" y="-30" width="120" height="60" as="geometry" />
+          <mxGeometry x="730" y="-260" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="inNDsGXoUcWYAkGI4Rf3-9" value="" style="triangle;whiteSpace=wrap;html=1;rotation=90;" vertex="1" parent="1">
           <mxGeometry x="590" y="-475" width="60" height="80" as="geometry" />
