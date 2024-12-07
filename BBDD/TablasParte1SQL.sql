@@ -77,26 +77,28 @@ CREATE TABLE Jornadas_Fases (
 );
 
 CREATE TABLE Partidos (
-    fecha DATE,
-    nombre_equipo_local VARCHAR(200),
-    nombre_equipo_visitante VARCHAR(200),
+    id_partido INTEGER PRIMARY KEY,
+    fecha DATE NOT NULL,
+    nombre_equipo_local VARCHAR(200) NOT NULL,
+    nombre_equipo_visitante VARCHAR(200) NOT NULL,
+    id_equipo_arbitral INTEGER NOT NULL,
     resultado_local INTEGER,
     resultado_visitante INTEGER,
     tipo_partido VARCHAR(20) NOT NULL CHECK (tipo_partido IN ('amistoso','competitivo')),
     nombre_jornada_fase VARCHAR(100),
     nombre_competicion VARCHAR(200),
     ano INTEGER,
-    PRIMARY KEY (fecha, nombre_equipo_local, nombre_equipo_visitante),
     FOREIGN KEY (nombre_equipo_local) REFERENCES Equipos(nombre),
     FOREIGN KEY (nombre_equipo_visitante) REFERENCES Equipos(nombre),
     FOREIGN KEY (nombre_jornada_fase, nombre_competicion, ano) REFERENCES Jornadas_Fases(nombre_jornada_fase, nombre_competicion, ano)
+    FOREIGN KEY (id_equipo_arbitral) REFERENCES Equipo_Arbitral(id_equipo_arbitral)
 );
 
 CREATE TABLE Arbitros (
-    id_arbitro INTEGER PRIMARY KEY,
-    nombre VARCHAR(200),
+    id_arbitro INTEGER,
+    nombre VARCHAR(100),
     nacionalidad VARCHAR(100),
-    rol VARCHAR(50) FOREIGN KEY REFERENCES Roles_Arb
+    PRIMARY KEY (id_arbitro),	
 );
 
 CREATE TABLE Roles_Arb (
@@ -104,11 +106,17 @@ CREATE TABLE Roles_Arb (
 );
 
 CREATE TABLE Equipo_Arbitral (
-    id_partido INTEGER,
+    id_equipo_arbitral INTEGER PRIMARY KEY,
+);
+
+CREATE TABLE ArbitrosRol (
     id_arbitro INTEGER,
-    PRIMARY KEY (id_partido, id_arbitro),
+    id_partido INTEGER,
+    rol VARCHAR(50),
+    PRIMARY KEY (id_arbitro, id_partido, rol),
     FOREIGN KEY (id_partido) REFERENCES Partidos(id_partido),
     FOREIGN KEY (id_arbitro) REFERENCES Arbitros(id_arbitro),
+    FOREIGN KEY (rol) REFERENCES Roles_Arb(rol)
 );
 
 CREATE TABLE Tipos_Lance (
