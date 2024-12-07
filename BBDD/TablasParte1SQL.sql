@@ -107,14 +107,15 @@ CREATE TABLE Roles_Arb (
 
 CREATE TABLE Equipo_Arbitral (
     id_equipo_arbitral INTEGER PRIMARY KEY,
+    id_partido INTEGER UNIQUE NOT NULL REFERENCES Partidos(id_partido)
 );
 
 CREATE TABLE ArbitrosRol (
     id_arbitro INTEGER,
-    id_partido INTEGER,
+    id_equipo_arbitral INTEGER,
     rol VARCHAR(50),
-    PRIMARY KEY (id_arbitro, id_partido, rol),
-    FOREIGN KEY (id_partido) REFERENCES Partidos(id_partido),
+    PRIMARY KEY (id_arbitro, id_equipo_arbitral, rol),
+    FOREIGN KEY (id_equipo_arbitral) REFERENCES Equipo_Arbitral(id_equipo_arbitral),
     FOREIGN KEY (id_arbitro) REFERENCES Arbitros(id_arbitro),
     FOREIGN KEY (rol) REFERENCES Roles_Arb(rol)
 );
