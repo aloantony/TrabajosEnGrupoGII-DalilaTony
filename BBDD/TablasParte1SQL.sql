@@ -1,4 +1,3 @@
-```
 CREATE TABLE Paises (
     nombre_pais VARCHAR(100) PRIMARY KEY,
     nombre_corto VARCHAR(20) UNIQUE
@@ -135,4 +134,3 @@ CREATE TABLE Lances (
     FOREIGN KEY (id_jugador) REFERENCES Jugadores(id_jugador),
     FOREIGN KEY (id_arbitro) REFERENCES Arbitros(id_arbitro)
 );
-```
