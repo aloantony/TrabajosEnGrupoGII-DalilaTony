@@ -829,3 +829,208 @@ WHERE pa.Tipo_Partida = 'Normal'
   );
 ROLLBACK;
 
+/*
+Consulta 6.1  
+Una consulta con subconsulta correlacionada en la cláusula SELECT que calcule una función de agregación.  
+*/
+
+/*
+Consulta 6.1.a.
+Esta consulta muestra, para cada jugador, su nombre y el promedio de Elo_MMR_Partida que ha tenido en 
+todas las partidas que jugó. Para ello:
+- Partimos de la tabla Jugadores (J).
+- En la lista SELECT, usamos una subconsulta correlacionada que:
+  - Filtra en Jugadores_Equipos (JE) por el ID_Jugador actual.
+  - Calcula el promedio (AVG) de Elo_MMR_Partida.
+- De este modo, cada jugador devuelve el promedio de su Elo_MMR_Partida.
+- Si un jugador no ha jugado ninguna partida, el resultado será NULL en el promedio.
+*/
+
+INSERT INTO Jugadores(ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'SingleSlayer', 'EU', 2000.00, 55.00, 3.50),
+(2, 'ThunderTail', 'NA', 1800.00, 49.00, 2.20),
+(3, 'SpokenNightmare', 'EU', 2100.00, 60.00, 4.00),
+(4, 'CursedPointer', 'NA', 1500.00, 30.00, 1.50); 
+
+INSERT INTO Partidas(ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(1, '2024-12-08 10:00:00', '00:30:00', 'Clasificatoria', 'Victoria', 'Derrota'),
+(2, '2024-12-08 11:00:00', '00:25:00', 'Normal', 'Derrota', 'Victoria');
+
+INSERT INTO Equipos(ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(200, 1, 1, 'Victoria'),
+(201, 1, 2, 'Derrota'),
+(202, 2, 1, 'Derrota'),
+(203, 2, 2, 'Victoria');
+
+INSERT INTO Jugadores_Equipos(ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(1, 200, 2050.00), 
+(2, 201, 1790.00), 
+(1, 202, 1980.00), 
+(3, 203, 2105.00); 
+
+/*
+ Consulta 6.1.a con subconsulta correlacionada
+ Para SingleSlayer (ID=1): La subconsulta filtra JE.ID_Jugador=1 y encuentra Elo_MMR_Partida = 2050 y 1980,
+ Promedio = (2050+1980)/2 = 2015.00
+ Para CursedPointer (ID=4): Sin filas en Jugadores_Equipos, la subconsulta devuelve NULL.
+*/
+SELECT 
+    J.Nombre_usuario,
+    (SELECT AVG(JE.Elo_MMR_Partida)
+     FROM Jugadores_Equipos JE
+     JOIN Equipos E ON JE.ID_Equipo = E.ID_Equipo
+     WHERE JE.ID_Jugador = J.ID_Jugador
+    ) AS Promedio_Elo_MMR_Partidas
+FROM Jugadores J;
+
+ROLLBACK;
+
+/*
+Consulta 6.1.b.
+Versión equivalente sin subconsulta, utilizando GROUP BY:
+- Partimos de Jugadores (J).
+- Hacemos LEFT JOIN con Jugadores_Equipos (JE) y Equipos (E).
+- Agrupamos por Nombre_usuario.
+- Calculamos AVG(JE.Elo_MMR_Partida) directamente en el SELECT.
+- Si un jugador no tiene partidas, la función AVG devolverá NULL, ya que no hay filas que juntar.
+*/
+
+INSERT INTO Jugadores(ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'SingleSlayer', 'EU', 2000.00, 55.00, 3.50),
+(2, 'ThunderTail', 'NA', 1800.00, 49.00, 2.20),
+(3, 'SpokenNightmare', 'EU', 2100.00, 60.00, 4.00),
+(4, 'CursedPointer', 'NA', 1500.00, 30.00, 1.50);
+
+INSERT INTO Partidas(ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(1, '2024-12-08 10:00:00', '00:30:00', 'Clasificatoria', 'Victoria', 'Derrota'),
+(2, '2024-12-08 11:00:00', '00:25:00', 'Normal', 'Derrota', 'Victoria');
+
+INSERT INTO Equipos(ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(200, 1, 1, 'Victoria'),
+(201, 1, 2, 'Derrota'),
+(202, 2, 1, 'Derrota'),
+(203, 2, 2, 'Victoria');
+
+INSERT INTO Jugadores_Equipos(ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(1, 200, 2050.00),
+(2, 201, 1790.00),
+(1, 202, 1980.00),
+(3, 203, 2105.00);
+
+-- Consulta 6.1.b sin subconsulta
+-- Aquí el cálculo del promedio se realiza con GROUP BY.
+SELECT 
+    J.Nombre_usuario, 
+    AVG(JE.Elo_MMR_Partida) AS Promedio_Elo_MMR_Partidas
+FROM Jugadores J
+LEFT JOIN Jugadores_Equipos JE ON J.ID_Jugador = JE.ID_Jugador
+LEFT JOIN Equipos E ON JE.ID_Equipo = E.ID_Equipo
+GROUP BY J.Nombre_usuario
+
+ROLLBACK;
+
+/*
+Consulta 6.2    
+Para cada jugador, mostrar su Elo_MMR actual (de la tabla Jugadores) y su pico máximo de Elo_MMR registrado, correspondiente con el Elo_MMR_Partida más alto registrado,  
+independientemente del tipo de partida. Se harán dos versiones:  
+a) Una con subconsulta correlacionada en el SELECT.  
+b) Otra sin subconsulta, usando GROUP BY.
+*/
+
+/* La correlación añade las únicamente las filas al select con el valor más alto de Elo_MMR_Partida por jugador, 
+por lo tanto, en el caso del jugador "Thundertail", la fila (2, 203, 2120.00), será de la que se muestre el Elo_MMR_Partida como "pico_max_elo". 
+Mientras que la fila (2, 201, 1800.00) no mostrará el valor Elo_MMR_Partida como "pico_max_elo"
+*/
+
+/* 
+Consulta 6.2.a. Con subconsulta correlacionada.
+*/
+INSERT INTO Jugadores(ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'SingleSlayer',    'EU', 1900.00, 52.00, 2.90),
+(2, 'ThunderTail',     'NA', 2100.00, 58.00, 3.80),
+(3, 'SpokenNightmare', 'EU', 1750.00, 45.00, 2.00);
+
+INSERT INTO Partidas(ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(1, '2024-12-08 10:00:00', '00:40:00', 'Clasificatoria', 'Victoria', 'Derrota'),
+(2, '2024-12-08 11:30:00', '00:22:00', 'Normal', 'Derrota', 'Victoria');
+
+INSERT INTO Equipos(ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(200, 1, 1, 'Victoria'),
+(201, 1, 2, 'Derrota'),
+(202, 2, 1, 'Derrota'),
+(203, 2, 2, 'Victoria');
+
+INSERT INTO Jugadores_Equipos(ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(1, 200, 1955.00),
+(2, 201, 1800.00),
+(2, 203, 2120.00),
+(3, 202, 1795.00);
+
+-- Consulta con subconsulta correlacionada en SELECT
+
+SELECT 
+    J.Nombre_usuario,
+    J.Elo_MMR AS Elo_Actual,
+    (SELECT MAX(JE.Elo_MMR_Partida)
+     FROM Jugadores_Equipos JE
+     JOIN Equipos E ON JE.ID_Equipo = E.ID_Equipo
+     WHERE JE.ID_Jugador = J.ID_Jugador
+    ) AS pico_max_elo
+FROM Jugadores J;
+
+ROLLBACK;
+
+/*
+Consulta 6.2.b. Sin subconsulta (usando GROUP BY).
+Hacemos un JOIN y agrupamos por Jugador, calculando MAX(Elo_MMR_Partida) directamente.
+Los jugadores sin partidas tendrán NULL en el MAX.
+*/
+
+INSERT INTO Jugadores(ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'SingleSlayer',    'EU', 1900.00, 52.00, 2.90),
+(2, 'ThunderTail',     'NA', 2100.00, 58.00, 3.80),
+(3, 'SpokenNightmare', 'EU', 1750.00, 45.00, 2.00);
+
+INSERT INTO Partidas(ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(1, '2024-12-08 10:00:00', '00:40:00', 'Clasificatoria', 'Victoria', 'Derrota'),
+(2, '2024-12-08 11:30:00', '00:22:00', 'Normal', 'Derrota', 'Victoria');
+
+INSERT INTO Equipos(ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(200, 1, 1, 'Victoria'),
+(201, 1, 2, 'Derrota'),
+(202, 2, 1, 'Derrota'),
+(203, 2, 2, 'Victoria');
+
+INSERT INTO Jugadores_Equipos(ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(1, 200, 1955.00),
+(2, 201, 1800.00),
+(2, 203, 2120.00),
+(3, 202, 1795.00);
+
+-- Consulta sin subconsulta, utilizando GROUP BY y LEFT JOIN 
+SELECT 
+    J.Nombre_usuario,
+    J.Elo_MMR AS Elo_Actual,
+    MAX(JE.Elo_MMR_Partida) AS pico_max_elo
+FROM Jugadores J
+LEFT JOIN Jugadores_Equipos JE ON J.ID_Jugador = JE.ID_Jugador
+LEFT JOIN Equipos E ON JE.ID_Equipo = E.ID_Equipo
+GROUP BY J.Nombre_usuario, J.Elo_MMR;
+
+ROLLBACK;
