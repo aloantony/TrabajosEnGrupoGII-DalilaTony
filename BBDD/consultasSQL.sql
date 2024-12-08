@@ -57,18 +57,6 @@ CREATE TABLE Jugadores_Rivales (
 Consulta 1. Una consulta que utilice la nueva relación reflexiva en el cálculo de una función de 
 agregación. Naturalmente, la consulta tendrá agrupamiento.
 */
-INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
-VALUES
-(1, 'ShadowBlade', 'NA', 2500.50, 65.20, 3.45),
-(7, 'NightShade', 'NA', 2550.00, 66.00, 3.60),
-(19, 'GoldenKnight', 'NA', 2510.20, 65.50, 3.50);
-
-INSERT INTO Jugadores_Rivales (ID_Jugador, ID_Jugador_Rival) VALUES
-(1, 7),   -- ShadowBlade tiene como rival a NightShade
-(1, 19),  -- ShadowBlade también rivaliza con GoldenKnight
-(7, 1),   -- NightShade tiene como rival a ShadowBlade
-(7, 19),  -- NightShade rivaliza con GoldenKnight
-(19, 1);  -- GoldenKnight rivaliza con ShadowBlade
 
 /*
 Consulta 1.a.
@@ -83,6 +71,18 @@ Explicación de la consulta:
   (j.ID_Jugador, j.Nombre_usuario).
 - De esta manera, el resultado mostrará una fila por cada jugador, con el promedio del Elo_MMR de todos sus rivales.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'ShadowBlade', 'NA', 2500.50, 65.20, 3.45),
+(7, 'NightShade', 'NA', 2550.00, 66.00, 3.60),
+(19, 'GoldenKnight', 'NA', 2510.20, 65.50, 3.50);
+INSERT INTO Jugadores_Rivales (ID_Jugador, ID_Jugador_Rival) VALUES
+(1, 7),   -- ShadowBlade tiene como rival a NightShade
+(1, 19),  -- ShadowBlade también rivaliza con GoldenKnight
+(7, 1),   -- NightShade tiene como rival a ShadowBlade
+(7, 19),  -- NightShade rivaliza con GoldenKnight
+(19, 1);  -- GoldenKnight rivaliza con ShadowBlade
+
 SELECT 
     j.ID_Jugador,
     j.Nombre_usuario,
@@ -110,6 +110,17 @@ Explicación de la consulta:
 - De esta manera, el resultado mostrará una fila por cada jugador, con la cantidad total 
   de rivales que tiene.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'ShadowBlade', 'NA', 2500.50, 65.20, 3.45),
+(7, 'NightShade', 'NA', 2550.00, 66.00, 3.60),
+(19, 'GoldenKnight', 'NA', 2510.20, 65.50, 3.50);
+INSERT INTO Jugadores_Rivales (ID_Jugador, ID_Jugador_Rival) VALUES
+(1, 7),   -- ShadowBlade tiene como rival a NightShade
+(1, 19),  -- ShadowBlade también rivaliza con GoldenKnight
+(7, 1),   -- NightShade tiene como rival a ShadowBlade
+(7, 19),  -- NightShade rivaliza con GoldenKnight
+(19, 1);  -- GoldenKnight rivaliza con ShadowBlade
 
 SELECT 
     j.ID_Jugador,
@@ -120,7 +131,6 @@ JOIN Jugadores_Rivales jr ON j.ID_Jugador = jr.ID_Jugador
 JOIN Jugadores rival ON jr.ID_Jugador_Rival = rival.ID_Jugador
 GROUP BY j.ID_Jugador, j.Nombre_usuario;
 ROLLBACK;
-
 
 
 /*
