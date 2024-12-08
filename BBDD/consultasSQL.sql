@@ -51,7 +51,7 @@ CREATE TABLE Jugadores_Rivales (
     FOREIGN KEY (ID_Jugador_Rival) REFERENCES Jugadores(ID_Jugador) -- Relación con la tabla Jugadores (reflexiva)
 );
 
-
+COMMIT;
 
 /*
 Consulta 1. Una consulta que utilice la nueva relación reflexiva en el cálculo de una función de 
@@ -136,29 +136,7 @@ ROLLBACK;
 /*
 Consulta 2. Una consulta que represente un anidamiento de funciones de agregación. Haz 2 versiones, 
 una con subconsulta en el FROM y otra con subconsulta en el WITH
-*/
-INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
-VALUES
-(2, 'LunaStar', 'EU', 2300.75, 58.30, 2.90),
-(3, 'ThunderStrike', 'ASIA', 2450.00, 62.50, 3.10),
-(4, 'PhoenixRising', 'NA', 2400.25, 60.00, 3.00),
-(5, 'IceDragon', 'EU', 2200.80, 55.75, 2.70),
-(10, 'CrystalMage', 'NA', 2420.30, 60.80, 3.15),
-(18, 'RapidFire', 'ASIA', 2395.55, 61.50, 3.10);
-
-INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
-VALUES (1001, '2024-04-01', '00:35:20', 'Clasificatoria', 'Victoria', 'Derrota');
-
-INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
-VALUES
-(2001, 1001, 1, 'Victoria'),
-(2002, 1001, 2, 'Derrota');
-
-INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
-VALUES
-(2, 2001, 2300.75),  
-(3, 2001, 2450.00),  
-(18, 2002, 2395.55); 
+*/ 
 
 /*
 Consulta 2.a.a (con subconsulta en el FROM):
@@ -179,6 +157,25 @@ Así, anidamos funciones de agregación:
 - La subconsulta calcula la media global (AVG).
 - La consulta principal agrupa por región y cuenta jugadores (COUNT) que superan dicha media.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(2, 'LunaStar', 'EU', 2300.75, 58.30, 2.90),
+(3, 'ThunderStrike', 'ASIA', 2450.00, 62.50, 3.10),
+(4, 'PhoenixRising', 'NA', 2400.25, 60.00, 3.00),
+(5, 'IceDragon', 'EU', 2200.80, 55.75, 2.70),
+(10, 'CrystalMage', 'NA', 2420.30, 60.80, 3.15),
+(18, 'RapidFire', 'ASIA', 2395.55, 61.50, 3.10);
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES (1001, '2024-04-01', '00:35:20', 'Clasificatoria', 'Victoria', 'Derrota');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(2001, 1001, 1, 'Victoria'),
+(2002, 1001, 2, 'Derrota');
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(2, 2001, 2300.75),  
+(3, 2001, 2450.00),  
+(18, 2002, 2395.55);
 
 SELECT
     j.Region,
@@ -205,6 +202,25 @@ Nuevamente, anidamos funciones de agregación:
 - En la consulta principal, contamos (COUNT) cuántos jugadores cumplen las condiciones especificadas.
 - El LEFT JOIN (JOIN externo) sigue siendo necesario para conservar todas las regiones, incluso las que no tengan jugadores asociados a equipos.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(2, 'LunaStar', 'EU', 2300.75, 58.30, 2.90),
+(3, 'ThunderStrike', 'ASIA', 2450.00, 62.50, 3.10),
+(4, 'PhoenixRising', 'NA', 2400.25, 60.00, 3.00),
+(5, 'IceDragon', 'EU', 2200.80, 55.75, 2.70),
+(10, 'CrystalMage', 'NA', 2420.30, 60.80, 3.15),
+(18, 'RapidFire', 'ASIA', 2395.55, 61.50, 3.10);
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES (1001, '2024-04-01', '00:35:20', 'Clasificatoria', 'Victoria', 'Derrota');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(2001, 1001, 1, 'Victoria'),
+(2002, 1001, 2, 'Derrota');
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(2, 2001, 2300.75),  
+(3, 2001, 2450.00),  
+(18, 2002, 2395.55);
 
 WITH GlobalAverage AS (
     SELECT AVG(Elo_MMR) AS Global_Avg
@@ -228,6 +244,15 @@ Explicación:
 - Usamos este promedio en la consulta principal para filtrar jugadores con Elo_MMR superior.
 - Agrupamos por región y calculamos el promedio de Porcentaje_Victorias para los jugadores que cumplen la condición.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(2, 'LunaStar', 'EU', 2300.75, 58.30, 2.90),
+(3, 'ThunderStrike', 'ASIA', 2450.00, 62.50, 3.10),
+(4, 'PhoenixRising', 'NA', 2400.25, 60.00, 3.00),
+(5, 'IceDragon', 'EU', 2200.80, 55.75, 2.70),
+(10, 'CrystalMage', 'NA', 2420.30, 60.80, 3.15),
+(18, 'RapidFire', 'ASIA', 2395.55, 61.50, 3.10);
+
 SELECT
     j.Region,
     AVG(j.Porcentaje_Victorias) AS Promedio_Porcentaje_Superior
@@ -239,6 +264,7 @@ CROSS JOIN (
 WHERE j.Elo_MMR > pg.Promedio_Global_Elo
 GROUP BY j.Region;
 ROLLBACK;
+
 /*
 Consulta 2.b.b (con WITH):
 Determina, para cada región, el promedio del Porcentaje_Victorias de los jugadores que tienen un Elo_MMR superior 
@@ -248,6 +274,15 @@ Explicación:
 - En la consulta principal, filtramos jugadores con Elo_MMR superior al promedio calculado.
 - Agrupamos por región y calculamos el promedio de Porcentaje_Victorias para los jugadores que cumplen la condición.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(2, 'LunaStar', 'EU', 2300.75, 58.30, 2.90),
+(3, 'ThunderStrike', 'ASIA', 2450.00, 62.50, 3.10),
+(4, 'PhoenixRising', 'NA', 2400.25, 60.00, 3.00),
+(5, 'IceDragon', 'EU', 2200.80, 55.75, 2.70),
+(10, 'CrystalMage', 'NA', 2420.30, 60.80, 3.15),
+(18, 'RapidFire', 'ASIA', 2395.55, 61.50, 3.10);
+
 WITH PromedioEloGlobal AS (
     SELECT AVG(Elo_MMR) AS Promedio_Global_Elo
     FROM Jugadores
@@ -261,8 +296,6 @@ WHERE j.Elo_MMR > peg.Promedio_Global_Elo
 GROUP BY j.Region;
 ROLLBACK;
 
-
-
 /*
 Consulta 3. Modifica la versión con WITH haciendo que el resultado de la consulta anterior sea otra 
 subconsulta que puedas utilizar en una nueva consulta principal.
@@ -274,6 +307,18 @@ Consulta 3.a:
 2. Obtenemos por región el conteo de jugadores con Elo_MMR superior al promedio en JugadoresSuperanPromedio.
 3. En la consulta principal, filtramos las regiones que tienen al menos un jugador que cumple con las condiciones.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'ShadowBlade', 'NA', 2500, 65.2, 3.45),
+(2, 'LunaStar', 'EU', 2300.75, 58.3, 2.9),
+(3, 'ThunderStrike', 'ASIA', 2450, 62.5, 3.1);
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(1, 201, 2501),
+(1, 202, 2502),
+(2, 201, 2301),
+(3, 203, 2451);
+
 WITH PromedioEloGlobal AS (
     SELECT AVG(Elo_MMR) AS Promedio_Global
     FROM Jugadores
@@ -300,6 +345,11 @@ Consulta 3.b:
 3. En la consulta principal, usamos los resultados de PromedioPorcentajeSuperior para realizar una consulta adicional, 
    como seleccionar regiones con un promedio superior a un valor dado (por ejemplo, 60).
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'ShadowBlade', 'NA', 2500, 65.2, 3.45),
+(2, 'LunaStar', 'EU', 2300.75, 58.3, 2.9),
+(3, 'ThunderStrike', 'ASIA', 2450, 62.5, 3.1);
 WITH PromedioEloGlobal AS (
     SELECT AVG(Elo_MMR) AS Promedio_Global_Elo
     FROM Jugadores
@@ -329,29 +379,7 @@ divisor, seguramente así te sea más fácil reutilizar algunas filas de ejemplo
 	como la clave es X, y agrupamos por Y, se pueden repetir las Zs dentro de cada grupo.
  	2. Al menos uno de los dos cocientes deberá de tener un WHERE en la subconsulta
 */
-INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
-VALUES
-(1, 'ShadowBlade', 'NA', 2500, 65.2, 3.45),
-(2, 'LunaStar', 'EU', 2300.75, 58.3, 2.9),
-(3, 'ThunderStrike', 'ASIA', 2450, 62.5, 3.1);
 
-INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
-VALUES
-(101, '2024-04-01', '00:35:20', 'Clasificatoria', 'Victoria', 'Derrota'),
-(102, '2024-04-02', '00:28:45', 'Normal', 'Derrota', 'Victoria');
-
-INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
-VALUES
-(201, 101, 1, 'Victoria'),
-(202, 101, 2, 'Derrota'),
-(203, 102, 1, 'Derrota');
-
-INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
-VALUES
-(1, 201, 2501),
-(1, 202, 2502),
-(2, 201, 2301),
-(3, 203, 2451);
 /*
 Consulta 4.a.a. Jugadores asociados al menos con el 50% de los equipos en partidas de tipo 'Clasificatoria'.
 Explicación: 
@@ -359,6 +387,27 @@ Explicación:
 2. Calculamos el total de equipos únicos en partidas de tipo 'Clasificatoria' (subconsulta en el HAVING).
 3. Comparamos el conteo del dividendo con el 50% del conteo del divisor para determinar si el jugador cumple la condición.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'ShadowBlade', 'NA', 2500, 65.2, 3.45),
+(2, 'LunaStar', 'EU', 2300.75, 58.3, 2.9),
+(3, 'ThunderStrike', 'ASIA', 2450, 62.5, 3.1);
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(101, '2024-04-01', '00:35:20', 'Clasificatoria', 'Victoria', 'Derrota'),
+(102, '2024-04-02', '00:28:45', 'Normal', 'Derrota', 'Victoria');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(201, 101, 1, 'Victoria'),
+(202, 101, 2, 'Derrota'),
+(203, 102, 1, 'Derrota');
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(1, 201, 2501),
+(1, 202, 2502),
+(2, 201, 2301),
+(3, 203, 2451);
+
 SELECT j.ID_Jugador, j.Nombre_usuario
 FROM Jugadores j
 JOIN Jugadores_Equipos je ON j.ID_Jugador = je.ID_Jugador
@@ -382,6 +431,27 @@ Explicación:
 3. Comparamos el conteo de jugadores del dividendo con el 50% del total de jugadores de la región
    (subconsulta en HAVING).
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'ShadowBlade', 'NA', 2500, 65.2, 3.45),
+(2, 'LunaStar', 'EU', 2300.75, 58.3, 2.9),
+(3, 'ThunderStrike', 'ASIA', 2450, 62.5, 3.1);
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(101, '2024-04-01', '00:35:20', 'Clasificatoria', 'Victoria', 'Derrota'),
+(102, '2024-04-02', '00:28:45', 'Normal', 'Derrota', 'Victoria');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(201, 101, 1, 'Victoria'),
+(202, 101, 2, 'Derrota'),
+(203, 102, 1, 'Derrota');
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(1, 201, 2501),
+(1, 202, 2502),
+(2, 201, 2301),
+(3, 203, 2451);
+
 SELECT j.Region
 FROM Jugadores j
 LEFT JOIN Jugadores_Equipos je ON j.ID_Jugador = je.ID_Jugador
@@ -404,6 +474,27 @@ Explicación:
 2. En la subconsulta (HAVING), contamos el total de partidas >30min.
 3. Comparamos si las partidas >30min del jugador ≥ 0.65 * (total de partidas >30min).
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'ShadowBlade', 'NA', 2500, 65.2, 3.45),
+(2, 'LunaStar', 'EU', 2300.75, 58.3, 2.9),
+(3, 'ThunderStrike', 'ASIA', 2450, 62.5, 3.1);
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(101, '2024-04-01', '00:35:20', 'Clasificatoria', 'Victoria', 'Derrota'),
+(102, '2024-04-02', '00:28:45', 'Normal', 'Derrota', 'Victoria');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(201, 101, 1, 'Victoria'),
+(202, 101, 2, 'Derrota'),
+(203, 102, 1, 'Derrota');
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(1, 201, 2501),
+(1, 202, 2502),
+(2, 201, 2301),
+(3, 203, 2451);
+
 SELECT j.ID_Jugador, j.Nombre_usuario
 FROM Jugadores j
 JOIN Jugadores_Equipos je ON j.ID_Jugador = je.ID_Jugador
@@ -427,6 +518,27 @@ Explicación:
 4. Comparamos si jugadores >2400 ≥ 0.5 * total jugadores.
 5. LEFT JOIN para asegurar que todos los equipos aparezcan y luego se filtren con HAVING.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'ShadowBlade', 'NA', 2500, 65.2, 3.45),
+(2, 'LunaStar', 'EU', 2300.75, 58.3, 2.9),
+(3, 'ThunderStrike', 'ASIA', 2450, 62.5, 3.1);
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(101, '2024-04-01', '00:35:20', 'Clasificatoria', 'Victoria', 'Derrota'),
+(102, '2024-04-02', '00:28:45', 'Normal', 'Derrota', 'Victoria');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(201, 101, 1, 'Victoria'),
+(202, 101, 2, 'Derrota'),
+(203, 102, 1, 'Derrota');
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(1, 201, 2501),
+(1, 202, 2502),
+(2, 201, 2301),
+(3, 203, 2451);
+
 SELECT eq.ID_Equipo
 FROM Equipos eq
 LEFT JOIN Jugadores_Equipos je ON eq.ID_Equipo = je.ID_Equipo
@@ -448,30 +560,7 @@ con ALL y otra con NOT EXISTS
 /*
 Consulta 5.a.
 */
-INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
-VALUES
-(500, 'OverPower', 'NA', 2600, 65.0, 3.5),   -- Jugador muy fuerte
-(501, 'MidPlayer', 'NA', 2500, 60.0, 3.0),   -- Jugador intermedio
-(502, 'LowPlayer', 'NA', 2300, 55.0, 2.5);   -- Jugador más débil
 
-INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
-VALUES
-(1001, '2025-01-01', '00:30:00', 'Clasificatoria', 'Victoria', 'Derrota'),
-(1002, '2025-01-02', '00:28:00', 'Normal', 'Victoria', 'Derrota');
-
-INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
-VALUES
-(1101, 1001, 1, 'Victoria'),  -- Equipo ganador en Clasificatoria
-(1102, 1001, 2, 'Derrota'),   -- Equipo perdedor en Clasificatoria
-(1103, 1002, 1, 'Victoria'),  -- Equipo ganador en Normal
-(1104, 1002, 2, 'Derrota');   -- Equipo perdedor en Normal
-
-INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
-VALUES
-(501, 1101, 2501), -- MidPlayer en partida clasificatoria (ganador)
-(502, 1102, 2301), -- LowPlayer en partida clasificatoria (perdedor)
-(500, 1103, 2601), -- OverPower en partida normal (ganador)
-(501, 1104, 2502); -- MidPlayer en partida normal (perdedor)
 /*
 Consulta con MAX:
 Encontrar jugadores con Elo_MMR > MAX(Elo_MMR de jugadores en Clasificatoria).
@@ -479,6 +568,28 @@ Explicación:
 1. Subconsulta: Hallar el MAX(Elo_MMR) de los jugadores que participaron en 'Clasificatoria'.
 2. En el WHERE: Comparar Elo_MMR del jugador actual con este valor máximo.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(500, 'OverPower', 'NA', 2600, 65.0, 3.5),   -- Jugador muy fuerte
+(501, 'MidPlayer', 'NA', 2500, 60.0, 3.0),   -- Jugador intermedio
+(502, 'LowPlayer', 'NA', 2300, 55.0, 2.5);   -- Jugador más débil
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(1001, '2025-01-01', '00:30:00', 'Clasificatoria', 'Victoria', 'Derrota'),
+(1002, '2025-01-02', '00:28:00', 'Normal', 'Victoria', 'Derrota');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(1101, 1001, 1, 'Victoria'),  -- Equipo ganador en Clasificatoria
+(1102, 1001, 2, 'Derrota'),   -- Equipo perdedor en Clasificatoria
+(1103, 1002, 1, 'Victoria'),  -- Equipo ganador en Normal
+(1104, 1002, 2, 'Derrota');   -- Equipo perdedor en Normal
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(501, 1101, 2501), -- MidPlayer en partida clasificatoria (ganador)
+(502, 1102, 2301), -- LowPlayer en partida clasificatoria (perdedor)
+(500, 1103, 2601), -- OverPower en partida normal (ganador)
+(501, 1104, 2502); -- MidPlayer en partida normal (perdedor)
+
 SELECT j.ID_Jugador, j.Nombre_usuario
 FROM Jugadores j
 WHERE j.Elo_MMR > (
@@ -497,6 +608,27 @@ Explicación:
 1. La subconsulta lista los Elo_MMR de jugadores que participaron en 'Clasificatoria'.
 2. Con ALL: j.Elo_MMR > TODOS los Elo_MMR devueltos por la subconsulta.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(500, 'OverPower', 'NA', 2600, 65.0, 3.5),   -- Jugador muy fuerte
+(501, 'MidPlayer', 'NA', 2500, 60.0, 3.0),   -- Jugador intermedio
+(502, 'LowPlayer', 'NA', 2300, 55.0, 2.5);   -- Jugador más débil
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(1001, '2025-01-01', '00:30:00', 'Clasificatoria', 'Victoria', 'Derrota'),
+(1002, '2025-01-02', '00:28:00', 'Normal', 'Victoria', 'Derrota');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(1101, 1001, 1, 'Victoria'),  -- Equipo ganador en Clasificatoria
+(1102, 1001, 2, 'Derrota'),   -- Equipo perdedor en Clasificatoria
+(1103, 1002, 1, 'Victoria'),  -- Equipo ganador en Normal
+(1104, 1002, 2, 'Derrota');   -- Equipo perdedor en Normal
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(501, 1101, 2501), -- MidPlayer en partida clasificatoria (ganador)
+(502, 1102, 2301), -- LowPlayer en partida clasificatoria (perdedor)
+(500, 1103, 2601), -- OverPower en partida normal (ganador)
+(501, 1104, 2502); -- MidPlayer en partida normal (perdedor)
 SELECT j.ID_Jugador, j.Nombre_usuario
 FROM Jugadores j
 WHERE j.Elo_MMR > ALL (
@@ -516,6 +648,28 @@ Explicación:
 1. Usamos NOT EXISTS para comprobar que no exista un jugador en Clasificatoria con Elo_MMR >= j.Elo_MMR.
 2. Si no existe tal jugador, entonces j.Elo_MMR es mayor que todos los Elo_MMR de jugadores en Clasificatoria.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(500, 'OverPower', 'NA', 2600, 65.0, 3.5),   -- Jugador muy fuerte
+(501, 'MidPlayer', 'NA', 2500, 60.0, 3.0),   -- Jugador intermedio
+(502, 'LowPlayer', 'NA', 2300, 55.0, 2.5);   -- Jugador más débil
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(1001, '2025-01-01', '00:30:00', 'Clasificatoria', 'Victoria', 'Derrota'),
+(1002, '2025-01-02', '00:28:00', 'Normal', 'Victoria', 'Derrota');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(1101, 1001, 1, 'Victoria'),  -- Equipo ganador en Clasificatoria
+(1102, 1001, 2, 'Derrota'),   -- Equipo perdedor en Clasificatoria
+(1103, 1002, 1, 'Victoria'),  -- Equipo ganador en Normal
+(1104, 1002, 2, 'Derrota');   -- Equipo perdedor en Normal
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(501, 1101, 2501), -- MidPlayer en partida clasificatoria (ganador)
+(502, 1102, 2301), -- LowPlayer en partida clasificatoria (perdedor)
+(500, 1103, 2601), -- OverPower en partida normal (ganador)
+(501, 1104, 2502); -- MidPlayer en partida normal (perdedor)
+
 SELECT j.ID_Jugador, j.Nombre_usuario
 FROM Jugadores j
 WHERE NOT EXISTS (
@@ -542,6 +696,28 @@ Explicación:
    para obtener el mayor Elo_MMR de los jugadores que participaron en 'Clasificatoria'.
 3. Comparamos Elo_MMR del jugador con este valor máximo.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(500, 'OverPower', 'NA', 2600, 65.0, 3.5),   -- Jugador muy fuerte
+(501, 'MidPlayer', 'NA', 2500, 60.0, 3.0),   -- Jugador intermedio
+(502, 'LowPlayer', 'NA', 2300, 55.0, 2.5);   -- Jugador más débil
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(1001, '2025-01-01', '00:30:00', 'Clasificatoria', 'Victoria', 'Derrota'),
+(1002, '2025-01-02', '00:28:00', 'Normal', 'Victoria', 'Derrota');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(1101, 1001, 1, 'Victoria'),  -- Equipo ganador en Clasificatoria
+(1102, 1001, 2, 'Derrota'),   -- Equipo perdedor en Clasificatoria
+(1103, 1002, 1, 'Victoria'),  -- Equipo ganador en Normal
+(1104, 1002, 2, 'Derrota');   -- Equipo perdedor en Normal
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(501, 1101, 2501), -- MidPlayer en partida clasificatoria (ganador)
+(502, 1102, 2301), -- LowPlayer en partida clasificatoria (perdedor)
+(500, 1103, 2601), -- OverPower en partida normal (ganador)
+(501, 1104, 2502); -- MidPlayer en partida normal (perdedor)
+
 SELECT j.ID_Jugador, j.Nombre_usuario
 FROM Jugadores j
 JOIN Jugadores_Equipos je ON j.ID_Jugador = je.ID_Jugador
@@ -567,6 +743,28 @@ Explicación:
 2. La subconsulta devuelve una lista de Elo_MMR de jugadores de 'Clasificatoria'.
 3. Usamos la condición > ALL (subconsulta) para verificar que el Elo_MMR del jugador sea mayor que cada uno de ellos.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(500, 'OverPower', 'NA', 2600, 65.0, 3.5),   -- Jugador muy fuerte
+(501, 'MidPlayer', 'NA', 2500, 60.0, 3.0),   -- Jugador intermedio
+(502, 'LowPlayer', 'NA', 2300, 55.0, 2.5);   -- Jugador más débil
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(1001, '2025-01-01', '00:30:00', 'Clasificatoria', 'Victoria', 'Derrota'),
+(1002, '2025-01-02', '00:28:00', 'Normal', 'Victoria', 'Derrota');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(1101, 1001, 1, 'Victoria'),  -- Equipo ganador en Clasificatoria
+(1102, 1001, 2, 'Derrota'),   -- Equipo perdedor en Clasificatoria
+(1103, 1002, 1, 'Victoria'),  -- Equipo ganador en Normal
+(1104, 1002, 2, 'Derrota');   -- Equipo perdedor en Normal
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(501, 1101, 2501), -- MidPlayer en partida clasificatoria (ganador)
+(502, 1102, 2301), -- LowPlayer en partida clasificatoria (perdedor)
+(500, 1103, 2601), -- OverPower en partida normal (ganador)
+(501, 1104, 2502); -- MidPlayer en partida normal (perdedor)
+
 SELECT j.ID_Jugador, j.Nombre_usuario
 FROM Jugadores j
 JOIN Jugadores_Equipos je ON j.ID_Jugador = je.ID_Jugador
@@ -592,6 +790,28 @@ Explicación:
 2. Verificamos con NOT EXISTS que no exista un jugador en 'Clasificatoria' con Elo_MMR >= j.Elo_MMR.
 3. Si no existe tal jugador, significa que el Elo_MMR del jugador seleccionado es mayor que el de todos en 'Clasificatoria'.
 */
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(500, 'OverPower', 'NA', 2600, 65.0, 3.5),   -- Jugador muy fuerte
+(501, 'MidPlayer', 'NA', 2500, 60.0, 3.0),   -- Jugador intermedio
+(502, 'LowPlayer', 'NA', 2300, 55.0, 2.5);   -- Jugador más débil
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(1001, '2025-01-01', '00:30:00', 'Clasificatoria', 'Victoria', 'Derrota'),
+(1002, '2025-01-02', '00:28:00', 'Normal', 'Victoria', 'Derrota');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(1101, 1001, 1, 'Victoria'),  -- Equipo ganador en Clasificatoria
+(1102, 1001, 2, 'Derrota'),   -- Equipo perdedor en Clasificatoria
+(1103, 1002, 1, 'Victoria'),  -- Equipo ganador en Normal
+(1104, 1002, 2, 'Derrota');   -- Equipo perdedor en Normal
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(501, 1101, 2501), -- MidPlayer en partida clasificatoria (ganador)
+(502, 1102, 2301), -- LowPlayer en partida clasificatoria (perdedor)
+(500, 1103, 2601), -- OverPower en partida normal (ganador)
+(501, 1104, 2502); -- MidPlayer en partida normal (perdedor)
+
 SELECT j.ID_Jugador, j.Nombre_usuario
 FROM Jugadores j
 JOIN Jugadores_Equipos je ON j.ID_Jugador = je.ID_Jugador
