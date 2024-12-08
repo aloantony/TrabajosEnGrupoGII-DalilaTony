@@ -1205,3 +1205,186 @@ AND
   );
 
 ROLLBACK;
+
+/*
+Consulta 8. Una consulta con subconsulta correlacionada en el HAVING. Explica el resultado de la 
+misma deshaciendo la correlación para una fila que salga en el resultado, y para otra que no salga. 
+*/
+/*
+Consulta 8a. Encontrar jugadores cuya media de Elo_MMR_Partida sea mayor que la media de Elo_MMR_Partida de todos sus rivales.
+Explicación:
+1. Seleccionamos cada jugador que haya jugado (JOIN con Jugadores_Equipos, Equipos, Partidas).
+2. Agrupamos por jugador para calcular su promedio Elo_MMR_Partida.
+3. En el HAVING, subconsulta correlacionada (con referencia a j.ID_Jugador):
+   - Calcula el promedio de Elo_MMR_Partida de los rivales de ese jugador.
+4. Comparamos el promedio del jugador con el promedio de sus rivales.
+   Si el promedio del jugador es mayor, el jugador aparece en el resultado.
+*/
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'ProGamer', 'NA', 2600.00, 65.00, 3.50),   -- Jugador con alto Elo_MMR en general
+(2, 'RivalX', 'NA', 2400.00, 60.00, 3.00),    -- Rival con Elo medio
+(3, 'Casual', 'NA', 2200.00, 55.00, 2.50),    -- Rival con Elo más bajo
+(4, 'Mediocre', 'NA', 2300.00, 58.00, 2.80);  -- Jugador con Elo algo más bajo que RivalX
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(101, '2025-01-01', '00:30:00', 'Normal', 'Victoria', 'Derrota'),
+(102, '2025-01-02', '00:35:00', 'Normal', 'Derrota', 'Victoria'),
+(103, '2025-01-03', '00:32:00', 'Normal', 'Victoria', 'Derrota'),
+(104, '2025-01-04', '00:40:00', 'Normal', 'Victoria', 'Derrota');
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(201, 101, 1, 'Victoria'),
+(202, 101, 2, 'Derrota'),
+(203, 102, 1, 'Derrota'),
+(204, 102, 2, 'Victoria'),
+(205, 103, 1, 'Victoria'),
+(206, 103, 2, 'Derrota'),
+(207, 104, 1, 'Victoria'),
+(208, 104, 2, 'Derrota');
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+-- ProGamer
+(1, 201, 2601.00), -- Partida 101
+(1, 204, 2602.00), -- Partida 102
+-- RivalX (Elo en partida ~2401, 2402)
+(2, 202, 2401.00), -- Partida 101
+(2, 203, 2402.00), -- Partida 102
+-- Casual (Elo en partida ~2201, 2202)
+(3, 205, 2201.00), -- Partida 103
+(3, 206, 2202.00), -- Partida 103
+-- Mediocre (Elo en partida ~2301, 2302)
+(4, 207, 2301.00), -- Partida 104
+(4, 208, 2302.00); -- Partida 104
+
+-- ProGamer (1) tiene como rivales a RivalX (2)
+INSERT INTO Jugadores_Rivales (ID_Jugador, ID_Jugador_Rival) VALUES (1, 2);
+-- RivalX (2) tiene como rival a Casual (3)
+INSERT INTO Jugadores_Rivales (ID_Jugador, ID_Jugador_Rival) VALUES (2, 3);
+-- Mediocre (4) tiene como rival a RivalX (2)
+INSERT INTO Jugadores_Rivales (ID_Jugador, ID_Jugador_Rival) VALUES (4, 2);
+
+SELECT j.ID_Jugador, j.Nombre_usuario
+FROM Jugadores j
+JOIN Jugadores_Equipos je ON j.ID_Jugador = je.ID_Jugador
+JOIN Equipos eq ON je.ID_Equipo = eq.ID_Equipo
+JOIN Partidas pa ON eq.ID_Partida = pa.ID_Partida
+GROUP BY j.ID_Jugador, j.Nombre_usuario
+HAVING AVG(je.Elo_MMR_Partida) > (
+    SELECT AVG(je2.Elo_MMR_Partida)
+    FROM Jugadores_Rivales jr
+    JOIN Jugadores_Equipos je2 ON jr.ID_Jugador_Rival = je2.ID_Jugador
+    WHERE jr.ID_Jugador = j.ID_Jugador
+);
+/*
+Jugador que SÍ sale en el resultado: ProGamer (ID=1)
+Promedio Elo_MMR_Partida de ProGamer: 2601.5
+Rivales de ProGamer: Solo RivalX (ID=2)
+Promedio de RivalX: (2401 + 2402)/2 = 2401.5 La condición: 2601.5 > 2401.5 se cumple, ProGamer aparece.
+*/
+
+SELECT AVG(je.Elo_MMR_Partida)
+FROM Jugadores_Equipos je
+WHERE je.ID_Jugador = 1;  -- (ProGamer)
+
+SELECT AVG(je2.Elo_MMR_Partida)
+FROM Jugadores_Rivales jr
+JOIN Jugadores_Equipos je2 ON jr.ID_Jugador_Rival = je2.ID_Jugador
+WHERE jr.ID_Jugador = 1; -- rivales de ProGamer (RivalX)
+
+
+/*
+Jugador que NO sale en el resultado: Mediocre (ID=4)
+Promedio Elo_MMR_Partida de Mediocre: (2301 + 2302)/2 = 2301.5
+Rival de Mediocre: RivalX (ID=2) con promedio 2401.5 Comparamos: 2301.5 > 2401.5 es FALSO, por lo tanto Mediocre no aparece.
+*/
+SELECT AVG(je2.Elo_MMR_Partida)
+FROM Jugadores_Rivales jr
+JOIN Jugadores_Equipos je2 ON jr.ID_Jugador_Rival = je2.ID_Jugador
+WHERE jr.ID_Jugador = 4; -- rivales de Mediocre (RivalX)
+ROLLBACK;
+
+
+/*
+Consulta 8.b.
+Consulta con subconsulta correlacionada en el HAVING:
+Encontrar los equipos cuya media de Elo_MMR_Partida es mayor que la media de Elo_MMR_Partida 
+de todos los equipos en la misma partida.
+Explicación:
+1. Agrupamos por equipo (ID_Equipo).
+2. Calculamos la media de Elo_MMR_Partida de los jugadores de cada equipo.
+3. En el HAVING, subconsulta correlacionada:
+   - Se usa eq.ID_Partida de la consulta externa para filtrar equipos de la misma partida.
+   - Calculamos la media general de Elo_MMR_Partida de todos los equipos de esa partida.
+4. Comparamos si la media del equipo actual es mayor que la media general.
+*/
+INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(700, 'TeamLeader', 'NA', 2500.00, 60.00, 3.00),
+(701, 'SupportHero', 'NA', 2400.00, 58.00, 2.80),
+(702, 'CarryStar', 'NA', 2600.00, 65.00, 3.50),
+(703, 'OffLane', 'NA', 2300.00, 55.00, 2.70);
+-- Insertamos una partida con dos equipos
+INSERT INTO Partidas (ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(2000, '2025-05-01', '00:35:00', 'Clasificatoria', 'Victoria', 'Derrota');
+-- Insertamos los dos equipos de la partida
+-- Equipo 1 (Ganador)
+INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(3000, 2000, 1, 'Victoria'),
+(3001, 2000, 2, 'Derrota');
+-- Asociamos jugadores a los equipos
+-- Equipo 1 (3000) tendrá jugadores con Elo_MMR_Partida altos
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(700, 3000, 2505.00),
+(702, 3000, 2610.00); -- Este jugador sube la media del equipo 1
+-- Equipo 2 (3001) tendrá jugadores con Elo_MMR_Partida más bajos
+INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(701, 3001, 2405.00),
+(703, 3001, 2305.00);
+
+SELECT eq.ID_Equipo
+FROM Equipos eq
+JOIN Jugadores_Equipos je ON eq.ID_Equipo = je.ID_Equipo
+GROUP BY eq.ID_Equipo, eq.ID_Partida
+HAVING AVG(je.Elo_MMR_Partida) > (
+    SELECT AVG(je2.Elo_MMR_Partida)
+    FROM Equipos eq2
+    JOIN Jugadores_Equipos je2 ON eq2.ID_Equipo = je2.ID_Equipo
+    WHERE eq2.ID_Partida = eq.ID_Partida
+);
+
+/*
+Jugador que SÍ sale en el resultado: ProGamer (ID=1) 
+Promedio Elo_MMR_Partida de ProGamer: 2601.5 
+Rivales de ProGamer: Solo RivalX (ID=2) 
+Promedio de RivalX: (2401 + 2402)/2 = 2401.5 
+La condición: 2601.5 > 2401.5 se cumple, ProGamer aparece.
+*/
+SELECT AVG(je.Elo_MMR_Partida)
+FROM Jugadores_Equipos je
+WHERE je.ID_Jugador = 1;  -- (ProGamer)
+
+SELECT AVG(je2.Elo_MMR_Partida)
+FROM Jugadores_Rivales jr
+JOIN Jugadores_Equipos je2 ON jr.ID_Jugador_Rival = je2.ID_Jugador
+WHERE jr.ID_Jugador = 1; -- rivales de ProGamer (RivalX)
+
+/*
+Jugador que NO sale en el resultado: Mediocre (ID=4)
+Promedio Elo_MMR_Partida de Mediocre: (2301 + 2302)/2 = 2301.5 
+Rival de Mediocre: RivalX (ID=2) con promedio 2401.5 
+Comparamos: 2301.5 > 2401.5 es FALSO, por lo tanto Mediocre no aparece.
+*/
+SELECT AVG(je.Elo_MMR_Partida)
+FROM Jugadores_Equipos je
+WHERE je.ID_Jugador = 4; -- Mediocre
+
+SELECT AVG(je2.Elo_MMR_Partida)
+FROM Jugadores_Rivales jr
+JOIN Jugadores_Equipos je2 ON jr.ID_Jugador_Rival = je2.ID_Jugador
+WHERE jr.ID_Jugador = 4; -- rivales de Mediocre (RivalX)
+ROLLBACK;
