@@ -1034,3 +1034,155 @@ LEFT JOIN Equipos E ON JE.ID_Equipo = E.ID_Equipo
 GROUP BY J.Nombre_usuario, J.Elo_MMR;
 
 ROLLBACK;
+
+/*
+Consulta 7.2
+
+Objetivo:
+Jugadores que solo hayan jugado partidas normales y al menos hayan ganado una.
+*/
+
+-- 7.2.a. Versión con INTERSECT y EXCEPT
+INSERT INTO Jugadores(ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'SingleSlayer',    'EU', 2000.00, 55.00, 3.50),
+(2, 'ThunderTail',     'NA', 2100.00, 58.00, 3.80),
+(3, 'SpokenNightmare', 'EU', 1900.00, 45.00, 2.00),
+(4, 'CursedPointer',   'NA', 1700.00, 30.00, 1.80);
+
+INSERT INTO Partidas(ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(1, '2024-12-08 09:00:00', '00:30:00', 'Clasificatoria', 'Victoria', 'Derrota'),
+(2, '2024-12-08 10:00:00', '00:25:00', 'Normal', 'Victoria', 'Derrota');
+
+INSERT INTO Equipos(ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(200, 1, 1, 'Victoria'),
+(201, 1, 2, 'Derrota'),
+(202, 2, 1, 'Victoria'),
+(203, 2, 2, 'Derrota');
+
+INSERT INTO Jugadores_Equipos(ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(1, 200, 2050.00),
+(1, 202, 1980.00),
+(2, 202, 2100.00),
+(3, 201, 1800.00),
+(4, 203, 1600.00);
+
+WITH JugVictoria AS (
+  -- Obtiene los IDs de jugadores que han estado en equipos victoriosos
+  SELECT DISTINCT JE.ID_Jugador
+  FROM Jugadores_Equipos JE
+  JOIN Equipos E ON JE.ID_Equipo=E.ID_Equipo
+  WHERE E.Resultado='Victoria'
+),
+JugNormal AS (
+  -- Obtiene los IDs de jugadores que han jugado partidas normales
+  SELECT DISTINCT JE.ID_Jugador
+  FROM Jugadores_Equipos JE
+  JOIN Equipos E ON JE.ID_Equipo=E.ID_Equipo
+  JOIN Partidas P ON E.ID_Partida=P.ID_Partida
+  WHERE P.Tipo_Partida='Normal'
+),
+JugClas AS (
+  -- Obtiene los IDs de jugadores que han jugado partidas clasificatorias
+  SELECT DISTINCT JE.ID_Jugador
+  FROM Jugadores_Equipos JE
+  JOIN Equipos E ON JE.ID_Equipo=E.ID_Equipo
+  JOIN Partidas P ON E.ID_Partida=P.ID_Partida
+  WHERE P.Tipo_Partida='Clasificatoria'
+),
+AllJug AS (
+  -- Obtiene todos los IDs de jugadores existentes
+  SELECT DISTINCT ID_Jugador FROM Jugadores
+),
+JugNoClas AS (
+  -- Identifica jugadores que nunca han jugado partidas clasificatorias
+  SELECT ID_Jugador FROM AllJug
+  EXCEPT
+  SELECT ID_Jugador FROM JugClas
+)
+
+-- Consulta final:
+-- 1. Toma jugadores con victorias
+-- 2. Que además hayan jugado partidas normales (INTERSECT)
+-- 3. Excluye a los que nunca han jugado clasificatorias (EXCEPT)
+SELECT ID_Jugador
+FROM JugVictoria
+INTERSECT
+SELECT ID_Jugador FROM JugNormal
+EXCEPT
+SELECT ID_Jugador FROM JugNoClas;
+
+ROLLBACK;
+
+
+
+--7.2.b. Versión con EXISTS y NOT EXISTS
+
+INSERT INTO Jugadores(ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
+VALUES
+(1, 'SingleSlayer',    'EU', 2000.00, 55.00, 3.50),
+(2, 'ThunderTail',     'NA', 2100.00, 58.00, 3.80),
+(3, 'SpokenNightmare', 'EU', 1900.00, 45.00, 2.00),
+(4, 'CursedPointer',   'NA', 1700.00, 30.00, 1.80);
+
+INSERT INTO Partidas(ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
+VALUES
+(1, '2024-12-08 09:00:00', '00:30:00', 'Clasificatoria', 'Victoria', 'Derrota'),
+(2, '2024-12-08 10:00:00', '00:25:00', 'Normal', 'Victoria', 'Derrota');
+
+INSERT INTO Equipos(ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
+VALUES
+(200, 1, 1, 'Victoria'),
+(201, 1, 2, 'Derrota'),
+(202, 2, 1, 'Victoria'),
+(203, 2, 2, 'Derrota');
+
+INSERT INTO Jugadores_Equipos(ID_Jugador, ID_Equipo, Elo_MMR_Partida)
+VALUES
+(1, 200, 2050.00),
+(1, 202, 1980.00),
+(2, 202, 2100.00),
+(3, 201, 1800.00),
+(4, 203, 1600.00);
+
+-- Versión con EXISTS/NOT EXISTS
+SELECT J.ID_Jugador
+FROM Jugadores J
+WHERE
+  -- El jugador debe tener al menos una partida con Victoria
+  EXISTS (
+    SELECT 1
+    FROM Jugadores_Equipos JE
+    JOIN Equipos E ON JE.ID_Equipo=E.ID_Equipo
+    WHERE JE.ID_Jugador=J.ID_Jugador
+      AND E.Resultado='Victoria'
+  )
+AND
+  -- El sjgador debe tener al menos una partida Normal
+  EXISTS (
+    SELECT 1
+    FROM Jugadores_Equipos JE
+    JOIN Equipos E ON JE.ID_Equipo=E.ID_Equipo
+    JOIN Partidas P ON E.ID_Partida=P.ID_Partida
+    WHERE JE.ID_Jugador=J.ID_Jugador
+      AND P.Tipo_Partida='Normal'
+  )
+AND
+  -- El jugador NO debe pertenecer a los que no han jugado Clasificatoria
+  NOT EXISTS (
+    SELECT 1
+    FROM Jugadores X
+    WHERE X.ID_Jugador=J.ID_Jugador
+      AND X.ID_Jugador NOT IN (
+        SELECT JE2.ID_Jugador
+        FROM Jugadores_Equipos JE2
+        JOIN Equipos E2 ON JE2.ID_Equipo=E2.ID_Equipo
+        JOIN Partidas P2 ON E2.ID_Partida=P2.ID_Partida
+        WHERE P2.Tipo_Partida='Clasificatoria'
+      )
+  );
+
+ROLLBACK;
