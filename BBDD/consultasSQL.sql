@@ -925,8 +925,7 @@ VALUES
 (1, 202, 1980.00),
 (3, 203, 2105.00);
 
--- Consulta 6.1.b sin subconsulta
--- Aquí el cálculo del promedio se realiza con GROUP BY.
+-- Consulta 6.1.b sin subconsulta con GROUP BY
 SELECT 
     J.Nombre_usuario, 
     AVG(JE.Elo_MMR_Partida) AS Promedio_Elo_MMR_Partidas
@@ -938,26 +937,29 @@ GROUP BY J.Nombre_usuario
 ROLLBACK;
 
 /*
-Consulta 6.2    
-Para cada jugador, mostrar su Elo_MMR actual (de la tabla Jugadores) y su pico máximo de Elo_MMR registrado, correspondiente con el Elo_MMR_Partida más alto registrado,  
-independientemente del tipo de partida. Se harán dos versiones:  
-a) Una con subconsulta correlacionada en el SELECT.  
-b) Otra sin subconsulta, usando GROUP BY.
+Consulta 6.2  
+Para cada jugador, mostrar su Elo_MMR actual (de la tabla Jugadores) y su pico máximo de Elo_MMR_Partida,
+independientemente del tipo de partida.
 */
 
-/* La correlación añade las únicamente las filas al select con el valor más alto de Elo_MMR_Partida por jugador, 
-por lo tanto, en el caso del jugador "Thundertail", la fila (2, 203, 2120.00), será de la que se muestre el Elo_MMR_Partida como "pico_max_elo". 
-Mientras que la fila (2, 201, 1800.00) no mostrará el valor Elo_MMR_Partida como "pico_max_elo"
+/*
+Consulta 6.2.a.
+Esta consulta muestra, para cada jugador, su Elo_MMR y el máximo Elo_MMR_Partida alcanzado.
+- Partimos de la tabla Jugadores (J).
+- En la lista SELECT, usamos una subconsulta correlacionada que:
+- Filtra en Jugadores_Equipos (JE) por el ID_Jugador actual (J.ID_Jugador).
+- Calcula el máximo (MAX) de Elo_MMR_Partida.
+  
+Si un jugador no ha jugado ninguna partida, el resultado será NULL en su pico máximo.
 */
 
-/* 
-Consulta 6.2.a. Con subconsulta correlacionada.
-*/
+-- Primero insertamos los datos necesarios
 INSERT INTO Jugadores(ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
 VALUES
 (1, 'SingleSlayer',    'EU', 1900.00, 52.00, 2.90),
 (2, 'ThunderTail',     'NA', 2100.00, 58.00, 3.80),
-(3, 'SpokenNightmare', 'EU', 1750.00, 45.00, 2.00);
+(3, 'SpokenNightmare', 'EU', 1750.00, 45.00, 2.00),
+(4, 'CursedPointer',   'NA', 2200.00, 63.00, 4.00);
 
 INSERT INTO Partidas(ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
 VALUES
@@ -978,8 +980,7 @@ VALUES
 (2, 203, 2120.00),
 (3, 202, 1795.00);
 
--- Consulta con subconsulta correlacionada en SELECT
-
+-- Consulta con subconsulta correlacionada
 SELECT 
     J.Nombre_usuario,
     J.Elo_MMR AS Elo_Actual,
@@ -990,12 +991,30 @@ SELECT
     ) AS pico_max_elo
 FROM Jugadores J;
 
+-- Deshaciendo la correlación para J.ID_Jugador=2 (ejemplo de fila con resultado):
+SELECT MAX(JE.Elo_MMR_Partida)
+FROM Jugadores_Equipos JE
+JOIN Equipos E ON JE.ID_Equipo=E.ID_Equipo
+WHERE JE.ID_Jugador=2;
+
+-- Si hubiera un jugador sin partidas, por ejemplo ID_Jugador=4:
+ SELECT MAX(JE.Elo_MMR_Partida)
+ FROM Jugadores_Equipos JE
+ JOIN Equipos E ON JE.ID_Equipo=E.ID_Equipo
+ WHERE JE.ID_Jugador=4;
+
 ROLLBACK;
 
 /*
-Consulta 6.2.b. Sin subconsulta (usando GROUP BY).
-Hacemos un JOIN y agrupamos por Jugador, calculando MAX(Elo_MMR_Partida) directamente.
-Los jugadores sin partidas tendrán NULL en el MAX.
+Consulta 6.2.b.
+Versión equivalente sin subconsulta, utilizando GROUP BY:
+- Partimos de Jugadores (J).
+- Hacemos LEFT JOIN con Jugadores_Equipos (JE) y Equipos (E).
+- Agrupamos por Nombre_usuario, J.Elo_MMR.
+- Calculamos MAX(JE.Elo_MMR_Partida) directamente.
+- Si un jugador no tiene partidas, MAX devolverá NULL.
+
+No es necesario "deshacer" nada aquí, pues no hay correlación.
 */
 
 INSERT INTO Jugadores(ID_Jugador, Nombre_usuario, Region, Elo_MMR, Porcentaje_Victorias, Promedio_KDA)
@@ -1003,6 +1022,7 @@ VALUES
 (1, 'SingleSlayer',    'EU', 1900.00, 52.00, 2.90),
 (2, 'ThunderTail',     'NA', 2100.00, 58.00, 3.80),
 (3, 'SpokenNightmare', 'EU', 1750.00, 45.00, 2.00);
+(4, 'CursedPointer',   'NA', 2200.00, 63.00, 4.00);
 
 INSERT INTO Partidas(ID_Partida, Fecha, Duracion, Tipo_Partida, Resultado_Equipo1, Resultado_Equipo2)
 VALUES
@@ -1023,7 +1043,6 @@ VALUES
 (2, 203, 2120.00),
 (3, 202, 1795.00);
 
--- Consulta sin subconsulta, utilizando GROUP BY y LEFT JOIN 
 SELECT 
     J.Nombre_usuario,
     J.Elo_MMR AS Elo_Actual,
