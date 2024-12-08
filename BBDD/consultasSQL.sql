@@ -480,7 +480,6 @@ WHERE j.Elo_MMR > (
     WHERE p2.Tipo_Partida = 'Clasificatoria'
 );
 ROLLBACK;
-
 /*
 Consulta con ALL:
 Encontrar jugadores con Elo_MMR > todos los Elo_MMR de jugadores en Clasificatoria.
@@ -518,5 +517,85 @@ WHERE NOT EXISTS (
     WHERE p2.Tipo_Partida = 'Clasificatoria'
     AND j2.Elo_MMR >= j.Elo_MMR
 );
+ROLLBACK;
+
+/*
+Consulta 5.b.
+*/
+/*
+Consulta con MAX:
+Queremos jugadores que hayan jugado al menos una partida normal 
+y cuyo Elo_MMR sea mayor que el Elo_MMR máximo de todos los jugadores de partidas clasificatorias.
+Explicación:
+1. Seleccionamos jugadores que participaron en partidas tipo 'Normal'.
+2. Usamos una subconsulta en el WHERE con (SELECT MAX(...)) 
+   para obtener el mayor Elo_MMR de los jugadores que participaron en 'Clasificatoria'.
+3. Comparamos Elo_MMR del jugador con este valor máximo.
+*/
+SELECT j.ID_Jugador, j.Nombre_usuario
+FROM Jugadores j
+JOIN Jugadores_Equipos je ON j.ID_Jugador = je.ID_Jugador
+JOIN Equipos eq ON je.ID_Equipo = eq.ID_Equipo
+JOIN Partidas pa ON eq.ID_Partida = pa.ID_Partida
+WHERE pa.Tipo_Partida = 'Normal'
+  AND j.Elo_MMR > (
+      SELECT MAX(j2.Elo_MMR)
+      FROM Jugadores j2
+      JOIN Jugadores_Equipos je2 ON j2.ID_Jugador = je2.ID_Jugador
+      JOIN Equipos eq2 ON je2.ID_Equipo = eq2.ID_Equipo
+      JOIN Partidas p2 ON eq2.ID_Partida = p2.ID_Partida
+      WHERE p2.Tipo_Partida = 'Clasificatoria'
+  );
+ROLLBACK;
+/*
+Consulta con ALL:
+Misma lógica que la anterior, pero ahora:
+Queremos jugadores que hayan jugado al menos una partida normal 
+y cuyo Elo_MMR sea mayor que el Elo_MMR de TODOS los jugadores de partidas clasificatorias.
+Explicación:
+1. Seleccionamos jugadores con partidas 'Normal'.
+2. La subconsulta devuelve una lista de Elo_MMR de jugadores de 'Clasificatoria'.
+3. Usamos la condición > ALL (subconsulta) para verificar que el Elo_MMR del jugador sea mayor que cada uno de ellos.
+*/
+SELECT j.ID_Jugador, j.Nombre_usuario
+FROM Jugadores j
+JOIN Jugadores_Equipos je ON j.ID_Jugador = je.ID_Jugador
+JOIN Equipos eq ON je.ID_Equipo = eq.ID_Equipo
+JOIN Partidas pa ON eq.ID_Partida = pa.ID_Partida
+WHERE pa.Tipo_Partida = 'Normal'
+  AND j.Elo_MMR > ALL (
+      SELECT j2.Elo_MMR
+      FROM Jugadores j2
+      JOIN Jugadores_Equipos je2 ON j2.ID_Jugador = je2.ID_Jugador
+      JOIN Equipos eq2 ON je2.ID_Equipo = eq2.ID_Equipo
+      JOIN Partidas p2 ON eq2.ID_Partida = p2.ID_Partida
+      WHERE p2.Tipo_Partida = 'Clasificatoria'
+  );
+ROLLBACK;
+/*
+Consulta con NOT EXISTS:
+Misma idea, pero usando NOT EXISTS:
+Buscamos jugadores de 'Normal' para los cuales NO EXISTA ningún jugador de 'Clasificatoria' 
+con Elo_MMR mayor o igual al suyo, garantizando así que son mayores que todos los de 'Clasificatoria'.
+Explicación:
+1. Seleccionamos jugadores con partidas 'Normal'.
+2. Verificamos con NOT EXISTS que no exista un jugador en 'Clasificatoria' con Elo_MMR >= j.Elo_MMR.
+3. Si no existe tal jugador, significa que el Elo_MMR del jugador seleccionado es mayor que el de todos en 'Clasificatoria'.
+*/
+SELECT j.ID_Jugador, j.Nombre_usuario
+FROM Jugadores j
+JOIN Jugadores_Equipos je ON j.ID_Jugador = je.ID_Jugador
+JOIN Equipos eq ON je.ID_Equipo = eq.ID_Equipo
+JOIN Partidas pa ON eq.ID_Partida = pa.ID_Partida
+WHERE pa.Tipo_Partida = 'Normal'
+  AND NOT EXISTS (
+      SELECT 1
+      FROM Jugadores j2
+      JOIN Jugadores_Equipos je2 ON j2.ID_Jugador = je2.ID_Jugador
+      JOIN Equipos eq2 ON je2.ID_Equipo = eq2.ID_Equipo
+      JOIN Partidas p2 ON eq2.ID_Partida = p2.ID_Partida
+      WHERE p2.Tipo_Partida = 'Clasificatoria'
+        AND j2.Elo_MMR >= j.Elo_MMR
+  );
 ROLLBACK;
 
