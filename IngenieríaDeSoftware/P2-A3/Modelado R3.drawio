@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0" version="25.0.3">
   <diagram name="Página-1" id="ugFiXAsnwTtlZbj_9aIm">
-    <mxGraphModel dx="712" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1187" dy="1288" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -332,16 +332,6 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="BdIv_0_Q4BM8nhYl7mgj-67" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;R2 a) Tiempo total reparación&lt;/font&gt;&lt;br&gt;&lt;/h1&gt;&lt;p&gt;Se calcula iterando sobre las filas de la relación REPARAR para un id_empleado y un id_ordenador determinados, sumando los tiempos trabajados de cada id_pieza.&lt;br&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="520" y="755" width="130" height="220" as="geometry" />
-        </mxCell>
-        <mxCell id="BdIv_0_Q4BM8nhYl7mgj-68" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" parent="1" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1180" y="595" as="sourcePoint" />
-            <mxPoint x="1230" y="595" as="targetPoint" />
-            <Array as="points" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="BdIv_0_Q4BM8nhYl7mgj-69" value="Piezas" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" parent="1" vertex="1">
           <mxGeometry x="320" y="615" width="290" height="120" as="geometry" />
         </mxCell>
@@ -384,16 +374,6 @@
             <mxRectangle width="260" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="BdIv_0_Q4BM8nhYl7mgj-79" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;R2 d) Coste total por sueldos y por piezas de las reparaciones&lt;/font&gt;&lt;br&gt;&lt;/h1&gt;&lt;p&gt;Se calcula iterando sobre las filas de la relación REPARAR de un ordenador específico,&amp;nbsp; la suma de los tiempos en horas para cada pieza, los sueldos_hora de&amp;nbsp; la tabla empleados y los precios de las piezas&lt;br&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="1100" y="945" width="220" height="180" as="geometry" />
-        </mxCell>
-        <mxCell id="BdIv_0_Q4BM8nhYl7mgj-80" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0.943;exitY=1.122;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.224;entryY=0.002;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="BdIv_0_Q4BM8nhYl7mgj-56" target="BdIv_0_Q4BM8nhYl7mgj-79" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1181" y="734.73" as="sourcePoint" />
-            <mxPoint x="1150" y="845" as="targetPoint" />
-            <Array as="points" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="BdIv_0_Q4BM8nhYl7mgj-81" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="BdIv_0_Q4BM8nhYl7mgj-70" target="BdIv_0_Q4BM8nhYl7mgj-44" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="640" y="705" as="sourcePoint" />
@@ -403,34 +383,6 @@
         <mxCell id="BdIv_0_Q4BM8nhYl7mgj-82" value="N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="BdIv_0_Q4BM8nhYl7mgj-81" vertex="1" connectable="0">
           <mxGeometry x="-0.097" y="2" relative="1" as="geometry">
             <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="BdIv_0_Q4BM8nhYl7mgj-83" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;R2 b) Coste total por sueldo&lt;/font&gt;&lt;br&gt;&lt;/h1&gt;&lt;p&gt;Se calcula iterando sobre las filas de la relación REPARAR de un ordenador específico, la suma de los tiempos en horas de cada utilizada y los sueldos_hora de&amp;nbsp; la tabla empleados&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="1230" y="435" width="110" height="260" as="geometry" />
-        </mxCell>
-        <mxCell id="BdIv_0_Q4BM8nhYl7mgj-84" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="BdIv_0_Q4BM8nhYl7mgj-56" target="BdIv_0_Q4BM8nhYl7mgj-67" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="710" y="765" as="sourcePoint" />
-            <mxPoint x="760" y="715" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="BdIv_0_Q4BM8nhYl7mgj-85" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;R2 c) Coste total por pieza&lt;/font&gt;&lt;br&gt;&lt;/h1&gt;&lt;p&gt;Se calcula iterando sobre las filas de la relación REPARAR de un ordenador específico, las piezas utilizadas y los coste_pieza de&amp;nbsp; la tabla piezas&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="1230" y="685" width="110" height="210" as="geometry" />
-        </mxCell>
-        <mxCell id="BdIv_0_Q4BM8nhYl7mgj-86" value="" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=-0.012;entryY=0.451;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="BdIv_0_Q4BM8nhYl7mgj-53" target="BdIv_0_Q4BM8nhYl7mgj-85" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1185" y="735" as="sourcePoint" />
-            <mxPoint x="1235" y="735" as="targetPoint" />
-            <Array as="points" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="BdIv_0_Q4BM8nhYl7mgj-87" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;R2 e) Coste total de la reparación de todos los ordenadores de la tienda&lt;/font&gt;&lt;br&gt;&lt;/h1&gt;&lt;p&gt;Se calcula iterando sobre todas las filas de la relación REPARAR, los costes por pieza, los suelos por hora de los empleados y el tiempo trabajado en horas.&lt;br&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="600" y="975" width="360" height="160" as="geometry" />
-        </mxCell>
-        <mxCell id="BdIv_0_Q4BM8nhYl7mgj-88" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0.13;exitY=1.082;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="BdIv_0_Q4BM8nhYl7mgj-56" target="BdIv_0_Q4BM8nhYl7mgj-87" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="729" y="806" as="sourcePoint" />
-            <mxPoint x="660" y="805" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="BdIv_0_Q4BM8nhYl7mgj-93" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;R3 a) Nº Participaciones empleado/reparación ordenador&lt;/font&gt;&lt;br&gt;&lt;/h1&gt;&lt;p&gt;Se calcula iterando sobre las filas de la relación REPARAR para un id_empleado y un id_ordenador determinados, contando el nº de fechas por cada pieza reparada.&lt;br&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
