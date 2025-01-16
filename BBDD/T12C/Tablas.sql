@@ -106,8 +106,8 @@ entonces la única clave está formada por todos los atributos de la relación.
     Ahora analizamos si el ID_Jugador, por sí solo, determina a todos los demás atributos
     de la relación.
     ID_Jugador no determina la relación (no determina ID_Partida). 
-    Combinando ID_Jugador con ID_Partida sí que conseguimos determinar toda la relación,
-    entonces, la clave es {ID_Jugador, ID_Partida}.
+    Combinando ID_Jugador con ID_Partida sí que conseguimos determinar toda la relación.
+    Por lo tanto, la clave es {ID_Jugador, ID_Partida}.
     */
 
 /*Justificación de que la vista alcanza la 1FN pero no la 2FN:
@@ -127,8 +127,17 @@ parcial, si existe un X ⊆ R, tal que X ⊂ A y X → B. En tal caso diremos qu
 
 /* Algoritmo de síntesis de Bernstein:
     Recubrimiento minimal: G = {ID_Jugador -> Nombre_usuario}
-    1. Juntar las dependencias con el mismo determinante (no se aplica)
-    2. 
+    1. Juntar las dependencias con el mismo determinante.
+        En este caso no se aplica.
+    2. Crear una relación por cada dependencia resultante. 
+        R1 = {ID_Jugador, Nombre_usuario}
+    3. Eliminar las relaciones que estén contenidas en otras.
+        En este caso no se aplica.
+    4.  Finalmente, para garantizar que no haya pérdidas de producto, si ninguna de las relaciones resultantes de la
+    descomposición contiene alguna de las claves de partida calculadas en el paso 1, se añade una última
+    relación con los atributos de una cualquiera de esa claves.
+        R1 no contiene la clave {ID_Jugador, ID_Partida}, entonces añadimos R2 = {ID_Jugador, ID_Partida}.
+        Resultado de la descomposición: R1, R2
 */
 
 DROP VIEW IF EXISTS SegundaVista CASCADE;
@@ -181,7 +190,9 @@ entonces la única clave está formada por todos los atributos de la relación.
     Ahora analizamos si el ID_Equipo, por sí solo, determina a todos los demás atributos
     de la relación.
     ID_Equipo determina la relación completa, porque este determina el ID_Partida y el 
-    ID_Partida determina el tipo_Partida y la fecha. Por lo tanto ID_Equipo es la clave.
+    ID_Partida determina el tipo_Partida y la fecha. 
+    
+    Por lo tanto ID_Equipo es la clave.
     */
 
 /*Justificación de que la vista alcanza la 2FN pero no la 3FN:
@@ -197,6 +208,24 @@ partes izquierdas de las dependencias son claves o están contenidas en alguna c
     No alcanza la 3FN porque conociendo el recubrimiento minimal, observamos que la parte izquierda 
     de la dependencia {ID_Partida -> tipo_Partida, fecha}, ni es clave, ni pertenece a una clave.
 */
+
+/* Algoritmo de síntesis de Bernstein:
+    Recubrimiento minimal: F = {ID_Equipo -> ID_Partida, ID_Partida -> tipo_Partida, fecha}
+    1. Juntar las dependencias con el mismo determinante.
+        En este caso no se aplica.
+    2. Crear una relación por cada dependencia resultante. 
+        R1 = {ID_Equipo, ID_Partida}
+        R2 = {ID_Partida, tipo_Partida, fecha}
+    3. Eliminar las relaciones que estén contenidas en otras.
+        En este caso no se aplica.
+    4.  Finalmente, para garantizar que no haya pérdidas de producto, si ninguna de las relaciones resultantes de la
+    descomposición contiene alguna de las claves de partida calculadas en el paso 1, se añade una última
+    relación con los atributos de una cualquiera de esa claves.
+        En este caso, no se aplica porque R1 contiene la clave ID_Equipo.
+        Resultado de la descomposición: R1, R2.
+*/
+
+
 
 -- Insertar un jugador
 UPDATE jugadores
@@ -306,4 +335,21 @@ clave."
     Alcanza la 2FN porque no hay ningún atributo no clave que dependa parcialmente de la clave.
     No alcanza la 3FN porque conociendo el recubrimiento minimal, observamos que la parte izquierda 
     de la dependencia {ID_Jugador -> Elo_MMR}, no es clave candidata.
+*/
+
+/* Algoritmo de síntesis de Bernstein:
+    Recubrimiento minimal: F = {ID_Jugador -> Elo_MMR,
+                                ID_Jugador, ID_Equipo -> Historico_Elo_MMR_Jugador}
+    1. Juntar las dependencias con el mismo determinante.
+        En este caso no se aplica.
+    2. Crear una relación por cada dependencia resultante. 
+        R1 = {ID_Jugador, Elo_MMR}
+        R2 = {ID_Jugador, ID_Equipo, Historico_Elo_MMR_Jugador}
+    3. Eliminar las relaciones que estén contenidas en otras.
+        En este caso no se aplica.
+    4.  Finalmente, para garantizar que no haya pérdidas de producto, si ninguna de las relaciones resultantes de la
+    descomposición contiene alguna de las claves de partida calculadas en el paso 1, se añade una última
+    relación con los atributos de una cualquiera de esa claves.
+        En este caso, no se aplica porque R2 contiene la clave {ID_Jugador, ID_Equipo}.
+        Resultado de la descomposición: R1, R2.
 */
