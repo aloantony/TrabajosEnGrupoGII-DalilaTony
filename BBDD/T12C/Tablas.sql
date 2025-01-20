@@ -2,6 +2,7 @@ CREATE DATABASE T12C;
 
 DROP TABLE IF EXISTS Jugadores, Partidas, Equipos, Jugadores_Equipos CASCADE;
 
+-- Creación de la tabla Jugadores
 CREATE TABLE Jugadores (
     ID_Jugador INTEGER PRIMARY KEY,
     Nombre_usuario VARCHAR(20),
