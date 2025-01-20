@@ -225,36 +225,6 @@ partes izquierdas de las dependencias son claves o están contenidas en alguna c
         Resultado de la descomposición: R1, R2.
 */
 
-
-
--- Insertar un jugador
-UPDATE jugadores
-SET Elo_MMR = 1505.00
-WHERE ID_Jugador = 1;
-INSERT INTO Jugadores (ID_Jugador, Nombre_usuario, Región, Elo_MMR, Promedio_KDA)
-VALUES (1, 'ProGamer123', 'EU', 1505.00, 3.50);
-
--- Insertar partidas
-INSERT INTO Partidas (ID_Partida, Fecha, Duración, Tipo_Partida)
-VALUES 
-(1, '2023-01-01', '00:45:00', 'Ranked'),
-(2, '2023-01-02', '00:35:00', 'Ranked'),
-(3, '2023-01-03', '00:40:00', 'Ranked');
-
--- Insertar equipos con resultados
-INSERT INTO Equipos (ID_Equipo, ID_Partida, Equipo_Numero, Resultado)
-VALUES
-(1, 1, 1, 'Victoria'),
-(2, 2, 2, 'Derrota'),
-(3, 3, 1, 'Victoria');
-
--- Insertar jugador en equipos con Elo histórico que varía según resultados
-INSERT INTO Jugadores_Equipos (ID_Jugador, ID_Equipo, Historico_Elo_MMR_Jugador)
-VALUES
-(1, 1, 1500.00),  -- Partida inicial
-(1, 2, 1485.00),  -- Bajada por derrota
-(1, 3, 1505.00);  -- Subida por victoria
-
 DROP VIEW IF EXISTS TerceraVista CASCADE;
 CREATE VIEW TerceraVista AS
 SELECT ID_Jugador, ID_Equipo, Historico_Elo_MMR_Jugador, Elo_MMR
