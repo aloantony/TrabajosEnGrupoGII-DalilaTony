@@ -7,13 +7,11 @@ de la partida. En cada partida solo hay un equipo ganador, no está permitido el
 Cada jugador tiene un ID único que los identifica y un nombre (no es necesariamente único).
 Además, éstos tienen dos métricas: 
 - Elo_MMR. Representa la habilidad actual del jugador. 
-- Pormedio_KDA. Refleja su desempeño promedio en términos de asesinatos, muertes y asistencias. 
+- Promedio_KDA. Refleja su desempeño promedio en términos de asesinatos, muertes y asistencias. 
 
 Las partidas se desempeñan entre jugadores con un Elo_MMR similar. El Elo_MMR con el que jugaron en un determinado
 equipo quedan registrados en Historico_Elo_MMR_Jugador.
 */
-
-CREATE DATABASE T12C;
 
 DROP TABLE IF EXISTS Jugadores, Partidas, Equipos, Jugadores_Equipos CASCADE;
 
