@@ -1,3 +1,18 @@
+/*
+Este trabajo implementa un esquema de base de datos diseñado para gestionar el sistema de 
+matchmaking de un videojuego. 
+En cada partida compiten dos equipos, los equipos son únicos y se forman a continuación de la creación
+de la partida. En cada partida solo hay un equipo ganador, no está permitido el empate. 
+
+Cada jugador tiene un ID único que los identifica y un nombre (no es necesariamente único).
+Además, éstos tienen dos métricas: 
+- Elo_MMR. Representa la habilidad actual del jugador. 
+- Pormedio_KDA. Refleja su desempeño promedio en términos de asesinatos, muertes y asistencias. 
+
+Las partidas se desempeñan entre jugadores con un Elo_MMR similar. El Elo_MMR con el que jugaron en un determinado
+equipo quedan registrados en Historico_Elo_MMR_Jugador.
+*/
+
 CREATE DATABASE T12C;
 
 DROP TABLE IF EXISTS Jugadores, Partidas, Equipos, Jugadores_Equipos CASCADE;
@@ -24,7 +39,7 @@ CREATE TABLE Equipos (
     ID_Equipo INTEGER PRIMARY KEY,
     ID_Partida INTEGER,
     Equipo_Numero INTEGER,
-	Resultado VARCHAR(15),
+    Resultado VARCHAR(15),
     FOREIGN KEY (ID_Partida) REFERENCES Partidas(ID_Partida)
 );
 
