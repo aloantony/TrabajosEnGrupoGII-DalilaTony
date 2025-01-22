@@ -901,36 +901,6 @@
                         <mxPoint x="-140" y="-259" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="2" value="ISA" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.merge_or_storage;whiteSpace=wrap;" vertex="1" parent="1">
-                    <mxGeometry x="99.37" y="-442.75" width="95" height="65.5" as="geometry"/>
-                </mxCell>
-                <mxCell id="3" value="Selecciones" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="47.370000000000005" y="-352.75" width="100" height="20" as="geometry"/>
-                </mxCell>
-                <mxCell id="4" value="Clubes" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="154.37" y="-352.75" width="100" height="20" as="geometry"/>
-                </mxCell>
-                <mxCell id="5" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;entryX=0.184;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.45;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="3" target="2">
-                    <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="569.37" y="-442.75" as="sourcePoint"/>
-                        <mxPoint x="619.37" y="-492.75" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="6" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.868;entryY=0.412;entryDx=0;entryDy=0;entryPerimeter=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="4" target="2">
-                    <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="569.37" y="-442.75" as="sourcePoint"/>
-                        <mxPoint x="189.37" y="-412.75" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="7" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;(0,n)&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="1">
-                    <mxGeometry x="94.27816010585059" y="-318.75729966404356" as="geometry"/>
-                </mxCell>
-                <mxCell id="8" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;(0,n)&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="1">
-                    <mxGeometry x="203.39893986550453" y="-315.7462544924481" as="geometry"/>
-                </mxCell>
-                <mxCell id="9" value="" style="shape=requiredInterface;html=1;verticalLabelPosition=bottom;sketch=0;rotation=90;" vertex="1" parent="1">
-                    <mxGeometry x="131.87" y="-445.25" width="30" height="120" as="geometry"/>
-                </mxCell>
             </root>
         </mxGraphModel>
     </diagram>
