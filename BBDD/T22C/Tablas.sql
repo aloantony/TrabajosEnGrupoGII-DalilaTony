@@ -1,6 +1,3 @@
-CREATE DATABASE T22C;
-
-\c T22C;
 -- Tabla Provincias
 CREATE TABLE Provincias (
     acronimo VARCHAR(3) PRIMARY KEY,
@@ -34,7 +31,9 @@ DROP TABLE IF EXISTS tipos_clientes CASCADE;
 -- Tabla Tipos Clientes
 CREATE TABLE tipos_clientes (
     nombreTC VARCHAR(20) PRIMARY KEY,
-    descripcion VARCHAR(50)
+    descripcion VARCHAR(50),
+    dniComerciales VARCHAR(9) UNIQUE NOT NULL,
+    FOREIGN KEY (dniComerciales) REFERENCES Comerciales(dni)
 );
 
 -- Tabla intermedia para la relación muchos a muchos entre Clientes y Tipos de Clientes
@@ -86,8 +85,8 @@ DROP TABLE IF EXISTS lineas_factura CASCADE;
         cantidad INTEGER,
         PRIMARY KEY (IDfactura, CIF, nombreFP, concepto),
         FOREIGN KEY (IDfactura, CIF, nombreFP) REFERENCES Facturas(IDfactura, CIF, nombreFP)
+        ON DELETE CASCADE ON UPDATE CASCADE
     );
-
     DROP TABLE IF EXISTS Comerciales CASCADE;
     CREATE TABLE Comerciales (
         dni VARCHAR(9) PRIMARY KEY,
@@ -103,6 +102,7 @@ DROP TABLE IF EXISTS Contactos CASCADE;
         CIF VARCHAR(9),
         fecha DATE,
         PRIMARY KEY (dniComercial, CIF, fecha),
+        UNIQUE (CIF, fecha),
         FOREIGN KEY (dniComercial) REFERENCES Comerciales(dni),
         FOREIGN KEY (CIF) REFERENCES Clientes(CIF)
     );
@@ -121,3 +121,39 @@ CREATE TABLE productos (
     FOREIGN KEY (color) REFERENCES colores(nombreC),
     PRIMARY KEY (referenciaFamilia, familia, color)
 );
+
+CREATE TABLE pedidos (
+    nro_pedido NUMERIC(8) PRIMARY KEY,
+    CIFClientePorContacto VARCHAR(9),
+    CIFclienteSinContacto VARCHAR(9),
+    dniComercial VARCHAR(9),
+    fecha DATE,
+    tieneContacto BOOLEAN NOT NULL,
+    FOREIGN KEY (CIFClienteSinContacto) REFERENCES Clientes(CIF),
+    FOREIGN KEY (dniComercial, CIFClientePorContacto, fecha) REFERENCES Contactos(dniComercial, CIF, fecha),
+    CHECK ( (tieneContacto = TRUE AND CIFClientePorContacto IS NOT NULL 
+                                  AND CIFClienteSinContacto IS NULL 
+                                  AND fecha IS NOT NULL 
+                                  AND dniComercial IS NOT NULL) 
+    OR (tieneContacto = FALSE AND CIFClientePorContacto IS NULL 
+                              AND CIFClienteSinContacto IS NOT NULL
+                              AND fecha IS NULL 
+                              AND dniComercial IS NULL) ) 
+);
+CREATE TABLE productos_pedidos_facturas (
+    referenciaFamilia VARCHAR(20),
+    familia VARCHAR(30),
+    color VARCHAR(20),
+    IDfactura NUMERIC(8),
+    CIF VARCHAR(9),
+    nombreFP VARCHAR(40),
+    concepto VARCHAR(50),
+    nro_pedido NUMERIC(8),
+    PRIMARY KEY (referenciaFamilia, familia, color, IDfactura, CIF, nombreFP, concepto),
+    UNIQUE (IDfactura, CIF, nombreFP, concepto, nro_pedido),
+    UNIQUE (nro_pedido, referenciaFamilia, familia, color),
+    FOREIGN KEY (referenciaFamilia, familia, color) REFERENCES productos(referenciaFamilia, familia, color),
+    FOREIGN KEY (IDfactura, CIF, nombreFP, concepto) REFERENCES lineas_factura(IDfactura, CIF, nombreFP, concepto),
+    FOREIGN KEY (nro_pedido) REFERENCES pedidos(nro_pedido)
+);
+
