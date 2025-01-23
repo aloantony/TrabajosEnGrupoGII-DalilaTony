@@ -4,6 +4,7 @@ CREATE TABLE Provincias (
     acronimo VARCHAR(3) PRIMARY KEY,
     nombre VARCHAR(30)
 );
+
 DROP TABLE IF EXISTS Ciudades CASCADE;
 -- Tabla Ciudades (entidad débil)
 CREATE TABLE Ciudades (
@@ -35,9 +36,10 @@ CREATE TABLE Clientes (
     provincia VARCHAR(3),
     FOREIGN KEY (nombreC, provincia) REFERENCES Ciudades(nombreC, provincia),
     FOREIGN KEY (forma_pago_defecto) REFERENCES Formas_de_Pago(nombreFP)
-    );
+);
+
 DROP TABLE IF EXISTS Clientes_Formas_Pago_Autorizados CASCADE;
--- Tabla intermedia para la relación muchos a muchos
+-- Tabla intermedia para la relación muchos a muchos (Clientes, Formas_de_Pago)
 CREATE TABLE Clientes_Formas_Pago_Autorizados (
     CIF VARCHAR(9),
     nombreFP VARCHAR(40),
@@ -47,14 +49,16 @@ CREATE TABLE Clientes_Formas_Pago_Autorizados (
 );
 
 DROP TABLE IF EXISTS Comerciales CASCADE;
-    CREATE TABLE Comerciales (
-        dni VARCHAR(9) PRIMARY KEY,
-        nombre VARCHAR(30),
-        ape1 VARCHAR(30),
-        ape2 VARCHAR(30),
-        e_mail VARCHAR(50),
-        tlfno NUMERIC(9)
-    );
+-- Tabla Comerciales
+CREATE TABLE Comerciales (
+    dni VARCHAR(9) PRIMARY KEY,
+    nombre VARCHAR(30),
+    ape1 VARCHAR(30),
+    ape2 VARCHAR(30),
+    e_mail VARCHAR(50),
+    tlfno NUMERIC(9)
+);
+
 DROP TABLE IF EXISTS tipos_clientes CASCADE;
 -- Tabla Tipos Clientes
 CREATE TABLE tipos_clientes (
@@ -75,49 +79,54 @@ CREATE TABLE cliente_es_tipo (
 );
 
 DROP TABLE IF EXISTS Facturas CASCADE;
-    CREATE TABLE Facturas (
-        IDfactura NUMERIC(8),
-        CIF VARCHAR(9),
-        nombreFP VARCHAR(40),
-        fecha DATE,
-        PRIMARY KEY (IDfactura, CIF, nombreFP),
-        FOREIGN KEY (CIF) REFERENCES Clientes(CIF),
-        FOREIGN KEY (nombreFP) REFERENCES Formas_de_Pago(nombreFP)
-    );
+-- Tabla Facturas
+CREATE TABLE Facturas (
+    IDfactura NUMERIC(8),
+    CIF VARCHAR(9),
+    nombreFP VARCHAR(40),
+    fecha DATE,
+    PRIMARY KEY (IDfactura, CIF, nombreFP),
+    FOREIGN KEY (CIF) REFERENCES Clientes(CIF),
+    FOREIGN KEY (nombreFP) REFERENCES Formas_de_Pago(nombreFP)
+);
 
 DROP TABLE IF EXISTS lineas_factura CASCADE;
-    CREATE TABLE lineas_factura (
-        IDfactura NUMERIC(8),
-        CIF VARCHAR(9),
-        nombreFP VARCHAR(40),
-        concepto VARCHAR(50),
-        precio_unitario DECIMAL(10,2),
-        cantidad INTEGER,
-        PRIMARY KEY (IDfactura, CIF, nombreFP, concepto),
-        FOREIGN KEY (IDfactura, CIF, nombreFP) REFERENCES Facturas(IDfactura, CIF, nombreFP)
+-- Tabla Líneas de Factura
+CREATE TABLE lineas_factura (
+    IDfactura NUMERIC(8),
+    CIF VARCHAR(9),
+    nombreFP VARCHAR(40),
+    concepto VARCHAR(50),
+    precio_unitario DECIMAL(10,2),
+    cantidad INTEGER,
+    PRIMARY KEY (IDfactura, CIF, nombreFP, concepto),
+    FOREIGN KEY (IDfactura, CIF, nombreFP) REFERENCES Facturas(IDfactura, CIF, nombreFP)
         ON DELETE CASCADE ON UPDATE CASCADE
-    );
+);
 
 DROP TABLE IF EXISTS Contactos CASCADE;
-    CREATE TABLE Contactos (
-        dniComercial VARCHAR(9),
-        CIF VARCHAR(9),
-        fecha DATE,
-        PRIMARY KEY (dniComercial, CIF, fecha),
-        UNIQUE (CIF, fecha),
-        FOREIGN KEY (dniComercial) REFERENCES Comerciales(dni),
-        FOREIGN KEY (CIF) REFERENCES Clientes(CIF)
-    );
+-- Tabla Contactos
+CREATE TABLE Contactos (
+    dniComercial VARCHAR(9),
+    CIF VARCHAR(9),
+    fecha DATE,
+    PRIMARY KEY (dniComercial, CIF, fecha),
+    UNIQUE (CIF, fecha),
+    FOREIGN KEY (dniComercial) REFERENCES Comerciales(dni),
+    FOREIGN KEY (CIF) REFERENCES Clientes(CIF)
+);
 
 DROP TABLE IF EXISTS colores CASCADE;
-    CREATE TABLE colores (
-        nombreC VARCHAR(20) PRIMARY KEY,
-        R NUMERIC(3),
-        G NUMERIC(3),
-        B NUMERIC(3)
-    );
+-- Tabla Colores
+CREATE TABLE colores (
+    nombreC VARCHAR(20) PRIMARY KEY,
+    R NUMERIC(3),
+    G NUMERIC(3),
+    B NUMERIC(3)
+);
 
 DROP TABLE IF EXISTS productos CASCADE;
+-- Tabla Productos
 CREATE TABLE productos (
     referenciaFamilia VARCHAR(20),
     familia VARCHAR(30),
@@ -127,6 +136,7 @@ CREATE TABLE productos (
 );
 
 DROP TABLE IF EXISTS pedidos CASCADE;
+-- Tabla Pedidos
 CREATE TABLE pedidos (
     nro_pedido NUMERIC(8) PRIMARY KEY,
     CIFClientePorContacto VARCHAR(9),
@@ -136,17 +146,18 @@ CREATE TABLE pedidos (
     tieneContacto BOOLEAN NOT NULL,
     FOREIGN KEY (CIFClienteSinContacto) REFERENCES Clientes(CIF),
     FOREIGN KEY (dniComercial, CIFClientePorContacto, fecha) REFERENCES Contactos(dniComercial, CIF, fecha),
-    CHECK ( (tieneContacto = TRUE AND CIFClientePorContacto IS NOT NULL 
-                                  AND CIFClienteSinContacto IS NULL 
-                                  AND fecha IS NOT NULL 
-                                  AND dniComercial IS NOT NULL) 
-    OR (tieneContacto = FALSE AND CIFClientePorContacto IS NULL 
-                              AND CIFClienteSinContacto IS NOT NULL
-                              AND fecha IS NULL 
-                              AND dniComercial IS NULL) ) 
+    CHECK (
+        (tieneContacto = TRUE AND CIFClientePorContacto IS NOT NULL 
+         AND CIFClienteSinContacto IS NULL AND fecha IS NOT NULL AND dniComercial IS NOT NULL) 
+        OR
+        (tieneContacto = FALSE AND CIFClientePorContacto IS NULL 
+         AND CIFClienteSinContacto IS NOT NULL AND fecha IS NULL AND dniComercial IS NULL)
+    )
 );
-DROP TABLE IF EXISTS productos_pedidos_facturas CASCADE;
-CREATE TABLE productos_pedidos_facturas (
+
+DROP TABLE IF EXISTS productos_pedidos_lineasfacturas CASCADE;
+-- Tabla intermedia (Productos, Pedidos, Facturas)
+CREATE TABLE productos_pedidos_lineasfacturas (
     referenciaFamilia VARCHAR(20),
     familia VARCHAR(30),
     color VARCHAR(20),
