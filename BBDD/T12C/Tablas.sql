@@ -265,16 +265,20 @@ Pasos del algoritmo para hallar un recubrimiento minimal equivalente:
     Tenemos 1 dependencia con más de un atributo en el lado izquierdo:
     {ID_Jugador, ID_Equipo -> Historico_Elo_MMR_Jugador}
     Sea G = F - {ID_Jugador, ID_Equipo -> Historico_Elo_MMR_Jugador} U {ID_Jugador -> Historico_Elo_MMR_Jugador}
-        No hace falta comprobar si F ⊆ G⁺ porque ocurre siempre.
+        Comprobamos si F ⊆ G⁺:
+            ¿podemos deducir que ID_Jugador, ID_Equipo -> Historico_Elo_MMR_Jugador en G?
+            ID_Jugador,ID_Equipo⁺₍G₎ = ID_Jugador, ID_Equipo, Elo_MMR, Historico_Elo_MMR_Jugador (esto siempre se cumple).
         Comprobamos si G ⊆ F⁺:
             ¿podemos deducir que ID_Jugador -> Historico_Elo_MMR_Jugador en F? 
-            ID_Jugador⁺₍F₎ = ID_Jugador, Elo_MMR --> Por lo tanto, como falta el ID_Equipo,
+            ID_Jugador⁺₍F₎ = ID_Jugador, Elo_MMR --> Por lo tanto, como falta el ID_Equipo para poder deducir Historico_Elo_MMR_Jugador,
             no podemos simplificarlo.
     Sea H = F - {ID_Jugador, ID_Equipo -> Historico_Elo_MMR_Jugador} U {ID_Equipo -> Historico_Elo_MMR_Jugador}
-        No hace falta comprobar si F ⊆ H⁺ porque ocurre siempre.
+            Comprobamos si F ⊆ H⁺:
+            ¿podemos deducir que ID_Jugador, ID_Equipo -> Historico_Elo_MMR_Jugador en G?
+            ID_Jugador,ID_Equipo⁺₍H₎ = ID_Jugador, ID_Equipo, Elo_MMR, Historico_Elo_MMR_Jugador (esto siempre se cumple).
         Comprobamos si H ⊆ F⁺:
             ¿podemos deducir que ID_Equipo -> Historico_Elo_MMR_Jugador en F? 
-            ID_Equipo⁺₍F₎ = ∅ --> Por lo tanto, no podemos simplificarlo.
+            ID_Equipo⁺₍F₎ = ID_Equipo --> Por lo tanto, no podemos simplificarlo.
 3. Eliminar las dependencias redundantes.
     ¿Sobra la dependencia ID_Jugador -> Elo_MMR?
     G = F - {ID_Jugador -> Elo_MMR}
