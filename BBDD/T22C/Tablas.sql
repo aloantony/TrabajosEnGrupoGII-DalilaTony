@@ -11,7 +11,7 @@ CREATE TABLE Ciudades (
     nombreC VARCHAR(20),
     provincia VARCHAR(3),
     PRIMARY KEY (nombreC, provincia),
-    FOREIGN KEY (provincia) REFERENCES Provincias(acronimo)
+    FOREIGN KEY (provincia) REFERENCES Provincias(acronimo) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS Formas_de_Pago CASCADE;
@@ -44,8 +44,8 @@ CREATE TABLE Clientes_Formas_Pago_Autorizados (
     CIF VARCHAR(9),
     nombreFP VARCHAR(40),
     PRIMARY KEY (CIF, nombreFP),
-    FOREIGN KEY (CIF) REFERENCES Clientes(CIF),
-    FOREIGN KEY (nombreFP) REFERENCES Formas_de_Pago(nombreFP)
+    FOREIGN KEY (CIF) REFERENCES Clientes(CIF) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (nombreFP) REFERENCES Formas_de_Pago(nombreFP) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS Comerciales CASCADE;
@@ -74,10 +74,9 @@ CREATE TABLE cliente_es_tipo (
     CIF VARCHAR(9),
     nombreTC VARCHAR(20),
     PRIMARY KEY (CIF, nombreTC),
-    FOREIGN KEY (CIF) REFERENCES Clientes(CIF),
-    FOREIGN KEY (nombreTC) REFERENCES tipos_clientes(nombreTC)
+    FOREIGN KEY (CIF) REFERENCES Clientes(CIF) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (nombreTC) REFERENCES tipos_clientes(nombreTC) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 DROP TABLE IF EXISTS Facturas CASCADE;
 -- Tabla Facturas
 CREATE TABLE Facturas (
@@ -86,7 +85,8 @@ CREATE TABLE Facturas (
     nombreFP VARCHAR(40),
     fecha DATE,
     PRIMARY KEY (IDfactura, CIF, nombreFP),
-    FOREIGN KEY (CIF) REFERENCES Clientes(CIF),
+    FOREIGN KEY (CIF) REFERENCES Clientes(CIF) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- Clientes es la entidad fuerte de la que dependen las facturas.
     FOREIGN KEY (nombreFP) REFERENCES Formas_de_Pago(nombreFP)
 );
 
