@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS Ciudades CASCADE;
 -- Tabla Ciudades (entidad débil)
 CREATE TABLE Ciudades (
     nombreC VARCHAR(20),
-    provincia VARCHAR(3),
+    provincia VARCHAR(3) NOT NULL,
     PRIMARY KEY (nombreC, provincia),
     FOREIGN KEY (provincia) REFERENCES Provincias(acronimo) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -31,9 +31,9 @@ CREATE TABLE Clientes (
     nro_cuenta_bancaria VARCHAR(24),
     direccion VARCHAR(80),
     nombre VARCHAR(15),
-    forma_pago_defecto VARCHAR(20),
-    nombreC VARCHAR(20),
-    provincia VARCHAR(3),
+    forma_pago_defecto VARCHAR(20) NOT NULL,
+    nombreC VARCHAR(20) NOT NULL,
+    provincia VARCHAR(3) NOT NULL,
     FOREIGN KEY (nombreC, provincia) REFERENCES Ciudades(nombreC, provincia),
     FOREIGN KEY (forma_pago_defecto) REFERENCES Formas_de_Pago(nombreFP)
 );
@@ -82,7 +82,7 @@ DROP TABLE IF EXISTS Facturas CASCADE;
 CREATE TABLE Facturas (
     IDfactura NUMERIC(8),
     CIF VARCHAR(9),
-    nombreFP VARCHAR(40),
+    nombreFP VARCHAR(40) NOT NULL,
     fecha DATE,
     PRIMARY KEY (IDfactura, CIF, nombreFP),
     FOREIGN KEY (CIF) REFERENCES Clientes(CIF) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -131,6 +131,7 @@ CREATE TABLE productos (
     referenciaFamilia VARCHAR(20),
     familia VARCHAR(30),
     color VARCHAR(20),
+    existencias INTEGER,
     FOREIGN KEY (color) REFERENCES colores(nombreC),
     PRIMARY KEY (referenciaFamilia, familia, color)
 );
